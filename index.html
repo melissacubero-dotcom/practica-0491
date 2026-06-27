@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Cuaderno UNED - Matematica para Administradores 0491</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<style>
+:root{--azul:#003087;--acento:#F5A800;--gris:#f4f6fb;--rojo:#c0392b;--verde:#1a6e2e;--vcl:#d4edda;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:Arial,Helvetica,sans-serif;background:#e4e8f0;color:#1a1a2e;}
+.katex{font-size:.97em!important;}.katex-display{margin:.35em 0!important;}
+.topbar{background:#fff;border-bottom:4px solid var(--azul);}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;gap:8px;flex-wrap:wrap;}
+.hdr-center{text-align:center;flex:1;min-width:160px;}
+.hdr-center .inst{font-size:.68rem;color:var(--azul);font-weight:bold;line-height:1.55;text-transform:uppercase;}
+.hdr-bar{background:var(--azul);color:#fff;text-align:center;padding:8px 14px;}
+.hdr-bar h1{font-size:1rem;font-weight:bold;margin-bottom:2px;line-height:1.3;}
+.hdr-bar .sub{font-size:.76rem;opacity:.9;}
+.hdr-bar .autor{font-size:.7rem;opacity:.75;font-style:italic;margin-top:3px;}
+#mainMenu{display:none;max-width:820px;margin:18px auto;padding:0 14px 26px;}
+.menu-title{text-align:center;color:var(--azul);font-size:.98rem;font-weight:bold;margin-bottom:14px;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:13px;}
+.mc{background:#fff;border-radius:12px;padding:18px 12px;text-align:center;cursor:pointer;
+  box-shadow:0 2px 10px rgba(0,0,60,.1);border-bottom:4px solid var(--acento);user-select:none;transition:transform .15s,box-shadow .15s;}
+.mc:active{transform:scale(.97);}
+@media(hover:hover){.mc:hover{transform:translateY(-3px);box-shadow:0 5px 18px rgba(0,0,60,.14);}}
+.mc .icon{font-size:1.8rem;margin-bottom:6px;}
+.mc .lbl{font-weight:bold;color:var(--azul);font-size:.86rem;}
+.mc .sub2{font-size:.7rem;color:#777;margin-top:4px;line-height:1.3;}
+.mc.done .lbl::after{content:" \2713";color:var(--verde);}
+#tabsArea{display:none;}
+.backbar{background:#e4e8f0;padding:7px 14px;}
+.back-btn{background:transparent;border:2px solid var(--azul);color:var(--azul);padding:7px 14px;border-radius:6px;cursor:pointer;font-size:.79rem;font-weight:bold;min-height:40px;}
+nav.tabs{display:flex;flex-wrap:wrap;background:var(--azul);}
+.tb{flex:1 1 auto;background:var(--azul);color:#fff;border:none;padding:10px 4px;cursor:pointer;font-size:.7rem;border-bottom:4px solid transparent;min-height:42px;}
+.tb.active{background:#00205a;border-bottom:4px solid var(--acento);}
+main{max-width:980px;margin:0 auto;padding:14px;min-height:50vh;}
+.tc{display:none;}.tc.active{display:block;animation:fi .3s;}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+h2.st{color:var(--azul);border-bottom:3px solid var(--acento);padding-bottom:6px;margin-bottom:12px;font-size:1rem;}
+.inst2{background:var(--gris);padding:10px 13px;border-radius:8px;margin-bottom:13px;font-size:.86rem;line-height:1.5;}
+button.pb{background:var(--azul);color:#fff;border:none;padding:10px 16px;border-radius:6px;cursor:pointer;font-size:.88rem;min-height:42px;}
+button.pb:disabled{opacity:.35;cursor:default;}
+button.ab{background:var(--acento);color:#1a1a2e;border:none;padding:10px 18px;border-radius:6px;cursor:pointer;font-weight:bold;font-size:.86rem;min-height:42px;}
+.tnb{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:13px;border-top:2px solid #dde;}
+.tnb button{background:var(--acento);color:var(--azul);border:none;padding:10px 15px;border-radius:7px;cursor:pointer;font-weight:bold;font-size:.82rem;min-height:42px;}
+.tnb button:disabled{opacity:.3;cursor:default;}
+.tnb .cnt{font-size:.78rem;color:#888;}
+.mcont{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.mcol{display:flex;flex-direction:column;gap:9px;min-width:140px;flex:1;max-width:300px;}
+.mcard{background:var(--gris);border:2px solid #c8d0e0;border-radius:8px;padding:10px;cursor:pointer;
+  font-size:.82rem;min-height:46px;line-height:1.4;transition:all .2s;}
+.mcard.selected{border-color:var(--azul);background:#dbe6ff;}
+.mcard.correct{background:var(--vcl);border-color:var(--verde);cursor:default;}
+.mcard.wrong{background:#f8d7da;border-color:var(--rojo);}
+.qctr{text-align:right;font-size:.79rem;color:#666;margin-bottom:8px;}
+.qcard{background:var(--gris);border-radius:10px;padding:12px;margin-bottom:12px;border-left:3px solid var(--azul);}
+.qtag{font-size:.67rem;font-weight:bold;padding:2px 7px;border-radius:10px;display:inline-block;margin-bottom:5px;}
+.qtag.ej{background:#cce5ff;color:#004085;}.qtag.ap{background:#d4edda;color:#155724;}
+.qq{font-weight:bold;margin-bottom:9px;font-size:.87rem;line-height:1.5;}
+.qopts{display:flex;flex-direction:column;gap:7px;}
+.qopt{background:#fff;border:2px solid #c8d0e0;border-radius:6px;padding:9px;text-align:left;
+  cursor:pointer;font-size:.84rem;min-height:40px;line-height:1.35;}
+.qopt:disabled{cursor:default;}
+.qopt.correct{background:var(--vcl);border-color:var(--verde);}
+.qopt.correct::after{content:" \2713";font-weight:bold;color:var(--verde);}
+.qopt.wrong{background:#f8d7da;border-color:var(--rojo);}
+.qfb{margin-top:7px;font-size:.81rem;font-style:italic;color:var(--azul);line-height:1.4;}
+.sbox{text-align:center;margin-top:13px;font-size:1.1rem;font-weight:bold;color:var(--azul);padding:11px;background:var(--gris);border-radius:8px;}
+.fwrap{display:flex;flex-direction:column;align-items:center;gap:13px;}
+.fcard{width:320px;max-width:90vw;height:200px;-webkit-perspective:1200px;perspective:1200px;cursor:pointer;}
+.finner{position:relative;width:100%;height:100%;
+  -webkit-transition:-webkit-transform .6s;transition:transform .6s;
+  -webkit-transform-style:preserve-3d;transform-style:preserve-3d;}
+.fcard.flipped .finner{-webkit-transform:rotateY(180deg);transform:rotateY(180deg);}
+.ff,.fb{position:absolute;width:100%;height:100%;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+  padding:14px;text-align:center;font-size:.86rem;box-shadow:0 2px 10px rgba(0,0,0,.14);line-height:1.5;overflow:auto;}
+.ff{background:var(--azul);color:#fff;}
+.fb{background:var(--acento);color:#1a1a2e;-webkit-transform:rotateY(180deg);transform:rotateY(180deg);}
+.fnav{display:flex;gap:12px;align-items:center;}
+.fnav button{background:var(--azul);color:#fff;border:none;padding:9px 15px;border-radius:6px;cursor:pointer;min-height:42px;}
+.fnav button:disabled{opacity:.4;cursor:default;}
+.nfield{background:var(--gris);padding:11px 13px;border-radius:8px;margin-bottom:13px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+.nfield label{font-size:.86rem;font-weight:bold;color:var(--azul);}
+.nfield input{padding:8px 11px;border:2px solid #c8d0e0;border-radius:6px;font-size:16px;flex:1;min-width:180px;}
+.nfield input:focus{outline:none;border-color:var(--azul);}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px;}
+.mmet{background:var(--gris);border-top:4px solid var(--acento);border-radius:8px;padding:11px;text-align:center;}
+.mmet .v{font-size:1.3rem;font-weight:bold;color:var(--azul);}
+.mmet .l{font-size:.7rem;color:#555;margin-top:4px;line-height:1.3;}
+.gsbox{text-align:center;background:var(--azul);color:#fff;padding:16px;border-radius:12px;margin-bottom:16px;}
+.gsbox .big{font-size:2.1rem;font-weight:bold;color:var(--acento);}
+.nb{display:inline-block;margin-top:7px;padding:4px 13px;border-radius:20px;font-weight:bold;font-size:.86rem;}
+.nb-b{background:#fff3cd;color:#856404;}.nb-i{background:#cce5ff;color:#004085;}.nb-a{background:#d4edda;color:#155724;}
+.rtw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table.rt{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:.78rem;min-width:350px;}
+table.rt th,table.rt td{border:1px solid #dde;padding:6px 8px;text-align:left;}
+table.rt th{background:var(--azul);color:#fff;}
+table.rt tr:nth-child(even){background:var(--gris);}
+.drow{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;margin-top:11px;}
+.wmsg{color:var(--rojo);font-size:.81rem;text-align:center;margin-top:7px;}
+#printOverlay{display:none;position:fixed;inset:0;background:rgba(0,20,70,.9);z-index:8888;padding:13px;overflow-y:auto;}
+.pbox{background:#fff;border-radius:12px;max-width:700px;margin:0 auto;padding:20px;}
+.pclose{display:flex;gap:10px;justify-content:flex-end;margin-bottom:11px;position:sticky;top:0;background:#fff;z-index:1;padding-bottom:7px;}
+.pclose button{min-height:42px;padding:8px 15px;border-radius:7px;border:none;cursor:pointer;font-weight:bold;font-size:.83rem;}
+footer{background:var(--gris);padding:9px 14px;border-top:2px solid var(--azul);}
+.pb-bar{background:#dde;border-radius:6px;height:9px;overflow:hidden;margin-bottom:4px;}
+.pb-fill{background:var(--acento);height:100%;width:0%;transition:width .3s;}
+#ptext{font-size:.74rem;color:var(--azul);}
+@media print{body>*:not(#printOverlay){display:none!important;}
+  #printOverlay{position:static!important;background:none!important;padding:0!important;}
+  .pclose{display:none!important;}.pbox{box-shadow:none!important;padding:0!important;}}
+@media(max-width:480px){.menu-grid{grid-template-columns:1fr 1fr;}.tb{font-size:.6rem;padding:8px 2px;}.hdr-bar h1{font-size:.86rem;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="hdr-top">
+    <div style="flex-shrink:0;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 220" width="160" height="104">
+  <defs>
+    <!-- Degradado principal: azul marino → violeta → naranja → rojo -->
+    <linearGradient id="g1" x1="0%" y1="30%" x2="100%" y2="70%">
+      <stop offset="0%"   stop-color="#1a2b6b"/>
+      <stop offset="28%"  stop-color="#2a2070"/>
+      <stop offset="50%"  stop-color="#6b2080"/>
+      <stop offset="72%"  stop-color="#d04010"/>
+      <stop offset="100%" stop-color="#c01008"/>
+    </linearGradient>
+    <!-- Degradado esfera izquierda azul oscuro -->
+    <radialGradient id="gs1" cx="38%" cy="32%" r="62%">
+      <stop offset="0%"   stop-color="#3a4fa0"/>
+      <stop offset="55%"  stop-color="#1a2b6b"/>
+      <stop offset="100%" stop-color="#0a1040"/>
+    </radialGradient>
+    <!-- Degradado esfera derecha naranja-rojo -->
+    <radialGradient id="gs2" cx="38%" cy="32%" r="62%">
+      <stop offset="0%"   stop-color="#ff7030"/>
+      <stop offset="55%"  stop-color="#d83010"/>
+      <stop offset="100%" stop-color="#a00808"/>
+    </radialGradient>
+    <!-- Sombra paralela (drop shadow flotante) -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4.5" result="blur"/>
+      <feOffset dx="2" dy="6" result="offset"/>
+      <feFlood flood-color="#888" flood-opacity="0.28" result="color"/>
+      <feComposite in="color" in2="offset" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Máscara para efecto 3D: brillo interior superior de la cinta -->
+    <linearGradient id="shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#fff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="clip-left">
+      <rect x="0" y="0" width="162" height="220"/>
+    </clipPath>
+    <clipPath id="clip-right">
+      <rect x="162" y="0" width="178" height="220"/>
+    </clipPath>
+  </defs>
+
+  <!-- ═══ SOMBRA BASE (capa flotante) ═══ -->
+  <ellipse cx="170" cy="170" rx="130" ry="10"
+           fill="#bbb" opacity="0.22" filter="url(#shadow)"/>
+
+  <!-- ═══ SÍMBOLO DE INFINITO (lemniscata tridimensional) ═══
+       Construido con dos trayectorias de Bézier entrelazadas:
+       Trayectoria exterior (grosor exterior) y trayectoria interior,
+       generando la ilusión de cinta/banda 3D.
+       Centro de cruce: aproximado en x≈162, y≈88                    -->
+
+  <!-- BANDA PRINCIPAL — trazo grueso con degradado completo -->
+  <g filter="url(#shadow)">
+
+    <!-- Lazo DERECHO (naranja→rojo) — dibujado primero (capa inferior) -->
+    <path d="
+      M162,88
+      C162,38  230,10  268,42
+      C306,74  306,118 268,138
+      C230,158 170,130 162,88
+      Z"
+      fill="none"
+      stroke="url(#g1)" stroke-width="36"
+      stroke-linecap="round" stroke-linejoin="round"
+      clip-path="url(#clip-right)"/>
+
+    <!-- Lazo IZQUIERDO (azul→violeta) — dibujado encima en su mitad -->
+    <path d="
+      M162,88
+      C162,38   94,10   56,42
+      C18,74    18,118  56,138
+      C94,158  154,130  162,88
+      Z"
+      fill="none"
+      stroke="url(#g1)" stroke-width="36"
+      stroke-linecap="round" stroke-linejoin="round"
+      clip-path="url(#clip-left)"/>
+
+    <!-- Re-dibujar la parte superior del lazo DERECHO encima del izquierdo
+         (cruce superior: naranja pasa POR ENCIMA del azul) -->
+    <path d="
+      M162,88
+      C162,38  230,10  268,42
+      C306,74  270,50  230,46"
+      fill="none"
+      stroke="url(#g1)" stroke-width="36"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Brillo interior superior (efecto 3D / volumen de cinta) -->
+    <path d="
+      M162,82
+      C162,46   94,18   56,48
+      C30,68   22,100  48,128"
+      fill="none"
+      stroke="url(#shine)" stroke-width="14"
+      stroke-linecap="round"/>
+    <path d="
+      M162,82
+      C162,46  230,18  268,48
+      C294,68  302,100 276,128"
+      fill="none"
+      stroke="url(#shine)" stroke-width="14"
+      stroke-linecap="round"/>
+  </g>
+
+  <!-- ═══ ESFERA IZQUIERDA — extremo superior izquierdo (azul oscuro) ═══ -->
+  <circle cx="56" cy="42" r="17" fill="url(#gs1)" filter="url(#shadow)"/>
+  <!-- Destello especular esfera izquierda -->
+  <ellipse cx="50" cy="36" rx="5.5" ry="3.5"
+           fill="white" opacity="0.45" transform="rotate(-30 50 36)"/>
+
+  <!-- ═══ ESFERA DERECHA — extremo inferior derecho (naranja-rojo) ═══ -->
+  <circle cx="268" cy="138" r="17" fill="url(#gs2)" filter="url(#shadow)"/>
+  <!-- Destello especular esfera derecha -->
+  <ellipse cx="262" cy="132" rx="5.5" ry="3.5"
+           fill="white" opacity="0.45" transform="rotate(-30 262 132)"/>
+
+  <!-- ═══ TIPOGRAFÍA — estilo Serif, alineada a la izquierda ═══ -->
+  <text x="28" y="186"
+        font-family="'Times New Roman', Georgia, 'Book Antiqua', serif"
+        font-size="15" fill="#000000" letter-spacing="0.4">Catedra de</text>
+  <text x="28" y="207"
+        font-family="'Times New Roman', Georgia, 'Book Antiqua', serif"
+        font-size="19" font-weight="bold" fill="#000000" letter-spacing="0.3">Matem&#225;ticas Aplicadas</text>
+</svg>
+    </div>
+    <div class="hdr-center">
+      <div class="inst">Universidad Estatal a Distancia</div>
+      <div class="inst">Vicerrectoria Academica</div>
+      <div class="inst" style="font-size:.78rem;letter-spacing:1px;">ECEN</div>
+      <div class="inst" style="color:#b8860b;">Catedra de Matematicas Aplicadas</div>
+    </div>
+    <div>
+      <svg viewBox="0 0 110 70" width="88" height="56">
+        <rect x="1" y="1" width="108" height="68" fill="none" stroke="#003087" stroke-width="2.5"/>
+        <text x="55" y="33" font-size="24" font-weight="900" fill="#003087" text-anchor="middle" font-family="Arial" letter-spacing="2">UNED</text>
+        <line x1="8" y1="39" x2="102" y2="39" stroke="#003087" stroke-width="1.5"/>
+        <text x="55" y="50" font-size="5.8" fill="#003087" text-anchor="middle" font-family="Arial">UNIVERSIDAD ESTATAL A DISTANCIA</text>
+        <text x="55" y="60" font-size="5.2" fill="#555" text-anchor="middle" font-family="Arial">Institucion Benemerita de la Educacion</text>
+        <text x="55" y="68" font-size="5.2" fill="#555" text-anchor="middle" font-family="Arial">y la Cultura - Costa Rica</text>
+      </svg>
+    </div>
+  </div>
+  <div class="hdr-bar">
+    <h1>Cuaderno Interactivo &mdash; Matem&aacute;tica para Administradores &nbsp;&middot;&nbsp; C&oacute;digo 0491</h1>
+    <p class="sub">Matem&aacute;ticas Aplicadas &nbsp;&middot;&nbsp; UNED de Costa Rica &nbsp;&middot;&nbsp; Escuela de Ciencias Exactas y Naturales</p>
+    <p class="autor">Elaborado por: MSc. Sarita Melissa Cubero Solano &nbsp;&middot;&nbsp; 2026</p>
+  </div>
+</div>
+
+<div id="mainMenu">
+  <p class="menu-title" style="margin-top:18px;">&#128218; Menu principal &mdash; seleccione una actividad</p>
+  <div class="menu-grid">
+    <div class="mc" onclick="openTab('asocie')"><div class="icon">&#128279;</div><div class="lbl" id="ml-asocie">Asocie</div><div class="sub2">Conceptos y definiciones clave</div></div>
+    <div class="mc" onclick="openTab('seleccion')"><div class="icon">&#128221;</div><div class="lbl" id="ml-seleccion">Seleccion unica</div><div class="sub2">40 preguntas con retroalimentacion</div></div>
+    <div class="mc" onclick="openTab('resultados')"><div class="icon">&#128203;</div><div class="lbl" id="ml-resultados">Resultados</div><div class="sub2">Desempeno e informe</div></div>
+  </div>
+</div>
+
+<div id="tabsArea">
+  <div class="backbar"><button class="back-btn" onclick="goHome()">&#8592; Menu principal</button></div>
+  <nav class="tabs">
+    <button class="tb" data-tab="asocie">1. Asocie</button>
+    <button class="tb" data-tab="seleccion">2. Seleccion unica</button>
+    <button class="tb" data-tab="resultados">3. Resultados</button>
+  </nav>
+  <main>
+    <section id="tab-asocie" class="tc">
+      <h2 class="st">Asocie cada concepto con su descripcion</h2>
+      <p class="inst2">Toque una tarjeta de la columna izquierda y luego la descripcion correspondiente de la derecha.</p>
+      <div class="mcont"><div class="mcol" id="mLeft"></div><div class="mcol" id="mRight"></div></div>
+      <div style="text-align:center;margin-top:13px;"><button class="pb" id="resetAsocieBtn">Reiniciar</button></div>
+      <div class="tnb"><button disabled>&#8592; Anterior</button><span class="cnt">1 de 3</span><button onclick="switchTab('seleccion')">Siguiente &#8594;</button></div>
+    </section>
+
+    <section id="tab-seleccion" class="tc">
+      <h2 class="st">Seleccion unica &mdash; 40 preguntas</h2>
+      <p class="inst2">Seleccione la respuesta correcta. <span style="background:#cce5ff;color:#004085;padding:1px 6px;border-radius:8px;font-size:.74rem;">Ejercicio</span> = calculo directo &nbsp;|&nbsp; <span style="background:#d4edda;color:#155724;padding:1px 6px;border-radius:8px;font-size:.74rem;">Aplicacion</span> = problema de contexto</p>
+      <div class="qctr" id="qCtr"></div>
+      <div id="mcqList"></div>
+      <div style="text-align:center;margin-top:9px;"><button class="pb" id="seeScoreBtn">Ver puntaje</button><div class="sbox" id="mcqScoreBox" style="display:none;"></div></div>
+      <div class="tnb"><button onclick="switchTab('asocie')">&#8592; Anterior</button><span class="cnt">2 de 3</span><button onclick="switchTab('resultados')">Siguiente &#8594;</button></div>
+    </section>
+
+    <section id="tab-resultados" class="tc">
+      <h2 class="st">Resultados de evaluacion</h2>
+      <div class="nfield"><label>Nombre del estudiante:</label><input type="text" id="nameInp" placeholder="Escriba su nombre completo" autocomplete="name"></div>
+      <div class="mgrid" id="mgrid"></div>
+      <div class="gsbox"><div>Puntaje global</div><div class="big" id="gsNum">--</div><div>/ 100 puntos</div><div id="nBadge"></div></div>
+      <div class="rtw"><table class="rt"><thead><tr><th>Actividad</th><th>Resultado</th><th>Detalle</th><th>Pts.</th></tr></thead><tbody id="rtBody"></tbody></table></div>
+      <div class="drow"><button class="ab" id="dlPdf">&#128196; Ver informe PDF</button><button class="ab" id="dlXls">&#128202; Descargar Excel</button></div>
+      <div class="wmsg" id="dlWarn"></div>
+      <div class="tnb"><button onclick="switchTab('seleccion')">&#8592; Anterior</button><span class="cnt">3 de 3</span><button disabled>Siguiente &#8594;</button></div>
+    </section>
+  </main>
+</div>
+
+<div id="printOverlay">
+  <div class="pbox">
+    <div class="pclose">
+      <button class="ab" onclick="window.print()">&#128424; Imprimir / PDF</button>
+      <button class="pb" onclick="document.getElementById('printOverlay').style.display='none'">&#10005; Cerrar</button>
+    </div>
+    <div id="printContent"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="pb-bar"><div class="pb-fill" id="pfill"></div></div>
+  <div id="ptext">Actividades visitadas: 0 de 4</div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+function shuffle(a){var b=[].concat(a);for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+function nowStr(){return new Date().toLocaleString('es-CR');}
+function escXml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function M(str){
+  if(!str)return '';
+  str=String(str);
+  str=str.replace(/\$\$([\s\S]+?)\$\$/g,function(_,t){
+    try{return katex.renderToString(t,{throwOnError:false,displayMode:true});}catch(e){return t;}
+  });
+  str=str.replace(/\$([^$\n]+?)\$/g,function(_,t){
+    try{return katex.renderToString(t,{throwOnError:false,displayMode:false});}catch(e){return t;}
+  });
+  return str;
+}
+
+/* ── ASOCIE DATA ── */
+var pairs=[
+  {id:1,concept:'Interes simple',def:'Rendimiento calculado como $I = P \\cdot r \\cdot t$, donde $P$ es el capital, $r$ la tasa anual y $t$ el tiempo en anos.'},
+  {id:2,concept:'Discriminante $\\Delta$',def:'$\\Delta = b^2 - 4ac$. Si $\\Delta > 0$: dos raices reales; si $\\Delta = 0$: raiz doble; si $\\Delta < 0$: sin raices reales.'},
+  {id:3,concept:'Racionalizacion',def:'Proceso de eliminar radicales del denominador multiplicando por la expresion conjugada adecuada.'},
+  {id:4,concept:'Valor absoluto $|x|$',def:'Distancia de $x$ al origen. Se resuelve separando en dos casos: $x \\geq 0$ y $x < 0$.'},
+  {id:5,concept:'Punto de equilibrio',def:'Valor $x^*$ donde $I(x^*) = C(x^*)$. Se halla resolviendo $px = C_F + c_v x$.'},
+  {id:6,concept:'Funcion de utilidad',def:'$U(x) = I(x) - C(x) = (p - c_v)x - C_F$. Indica la ganancia al producir $x$ unidades.'}
+];
+
+/* ── 40 PREGUNTAS ── */
+var Q=[
+  /* EJERCICIOS */
+  {t:'ej',q:'Resuelva: $3x - 12 = 0$. El conjunto solucion es:',
+   o:['$S = \\left\\{4\\right\\}$','$S = \\left\\{-4\\right\\}$','$S = \\left\\{3\\right\\}$','$S = \\left\\{12\\right\\}$'],
+   c:0,h:'Sume 12 a ambos miembros y divida entre 3.'},
+  {t:'ej',q:'Resuelva: $\\dfrac{2x-1}{3} = \\dfrac{x+4}{2}$. El conjunto solucion es:',
+   o:['$S = \\left\\{14\\right\\}$','$S = \\left\\{7\\right\\}$','$S = \\left\\{5\\right\\}$','$S = \\left\\{-14\\right\\}$'],
+   c:0,h:'Multiplique en cruz: $2(2x-1)=3(x+4)$.'},
+  {t:'ej',q:'Resuelva: $2x \\leq x-1 \\leq -x+3$. El conjunto solucion es:',
+   o:['$\\left]-\\infty,\\,-1\\right]$','$\\left]-\\infty,\\,2\\right]$','$\\left[-1,\\,2\\right]$','$\\left]-\\infty,\\,-1\\right[$'],
+   c:0,h:'Resuelva cada parte por separado y tome la interseccion.'},
+  {t:'ej',q:'Resuelva: $\\dfrac{3x-5}{2} < 3x-1 \\leq -8x+1$. El conjunto solucion es:',
+   o:['$\\left]-1,\\,\\dfrac{2}{11}\\right]$','$\\left[-1,\\,\\dfrac{2}{11}\\right]$','$\\left]-1,\\,\\dfrac{2}{11}\\right[$','$\\left[\\dfrac{2}{11},\\,-1\\right[$'],
+   c:0,h:'Parte izquierda: multiplique por 2. Parte derecha: sume $8x$.'},
+  {t:'ej',q:'Para que $x^2+8x+(m-3)>0$ sea verdad para todo $x$, se necesita:',
+   o:['$m > 19$','$m > 13$','$m < 19$','$m > 16$'],
+   c:0,h:'Se requiere $\\Delta < 0$: $64-4(m-3) < 0$.'},
+  {t:'ej',q:'Resuelva: $x^2 - x - 6 = 0$. El conjunto solucion es:',
+   o:['$S = \\left\\{3,\\,-2\\right\\}$','$S = \\left\\{-3,\\,2\\right\\}$','$S = \\left\\{6,\\,-1\\right\\}$','$S = \\left\\{2,\\,3\\right\\}$'],
+   c:0,h:'Use la formula general con $a=1, b=-1, c=-6$.'},
+  {t:'ej',q:'Valores de $k \\neq 0$ para que $2kx^2+(2-4k)x+2k=0$ tenga dos raices reales distintas:',
+   o:['$k < 1/4, \\; k \\neq 0$','$k > 1/4$','$k = 1/4$','$k < 4$'],
+   c:0,h:'Calcule $\\Delta=(2-4k)^2-16k^2$ y exija $\\Delta>0$.'},
+  {t:'ej',q:'Si $x=-3$ es solucion de $ax^2+(7-a)x+10a=23$, entonces $a$ vale:',
+   o:['$a = 2$','$a = -2$','$a = 4$','$a = 1$'],
+   c:0,h:'Sustituya $x=-3$ y resuelva la ecuacion lineal en $a$.'},
+  {t:'ej',q:'Con $a=2$, la ecuacion es $2x^2+5x-3=0$. La otra solucion (distinta de $x=-3$) es:',
+   o:['$x = 1/2$','$x = -1/2$','$x = 3$','$x = 1$'],
+   c:0,h:'Por Vieta: $x_1 \\cdot x_2 = c/a = -3/2$. Como $x_1=-3$, entonces $x_2=1/2$.'},
+  {t:'ej',q:'Valores de $k$ para que $(2kx-3)^2-5=0$ tenga dos soluciones reales:',
+   o:['Todo $k \\neq 0$','Solo $k=3/2$','$k=\\pm\\sqrt{5}$','Solo $k>0$'],
+   c:0,h:'$\\Delta=80k^2>0$ siempre que $k \\neq 0$.'},
+  {t:'ej',q:'Resuelva: $\\sqrt{x-2} = 3$. El conjunto solucion es:',
+   o:['$S = \\left\\{11\\right\\}$','$S = \\left\\{7\\right\\}$','$S = \\left\\{5\\right\\}$','$S = \\left\\{13\\right\\}$'],
+   c:0,h:'Eleve al cuadrado: $x-2=9$. Verifique.'},
+  {t:'ej',q:'Resuelva: $\\sqrt{x+5} = x-1$. El conjunto solucion es:',
+   o:['$S = \\left\\{4\\right\\}$','$S = \\left\\{4,\\,-1\\right\\}$','$S = \\left\\{-1\\right\\}$','$S = \\left\\{3\\right\\}$'],
+   c:0,h:'Eleve al cuadrado, resuelva la cuadratica y verifique ($x-1 \\geq 0$).'},
+  {t:'ej',q:'Resuelva: $3x - \\sqrt{9x^2-3x+4} = -1$. El conjunto solucion es:',
+   o:['$S = \\left\\{1/3\\right\\}$','$S = \\left\\{3\\right\\}$','$S = \\left\\{1\\right\\}$','$S = \\emptyset$'],
+   c:0,h:'Despeje: $\\sqrt{9x^2-3x+4}=3x+1$. Eleve al cuadrado.'},
+  {t:'ej',q:'Resuelva: $\\sqrt{3x+4} = 2\\sqrt{x+1}$. El conjunto solucion es:',
+   o:['$S = \\left\\{0\\right\\}$','$S = \\left\\{4\\right\\}$','$S = \\left\\{1\\right\\}$','$S = \\left\\{-4\\right\\}$'],
+   c:0,h:'Eleve al cuadrado: $3x+4=4(x+1)$.'},
+  {t:'ej',q:'Resuelva: $\\sqrt{2x-3} = 5-\\sqrt{x+2}$. La solucion aproximada es:',
+   o:['$x \\approx 4.5$','$x \\approx 7.5$','$x \\approx 2.5$','$x \\approx 155.5$'],
+   c:0,h:'Eleve al cuadrado, aislee el radical restante y vuelva a elevar.'},
+  {t:'ej',q:'Resuelva: $|2x-3| = 5$. El conjunto solucion es:',
+   o:['$S = \\left\\{4,\\,-1\\right\\}$','$S = \\left\\{4,\\,1\\right\\}$','$S = \\left\\{-4,\\,1\\right\\}$','$S = \\left\\{3,\\,-1\\right\\}$'],
+   c:0,h:'Separe: $2x-3=5$ y $2x-3=-5$.'},
+  {t:'ej',q:'Resuelva: $|2x-1| \\leq 5$. El conjunto solucion es:',
+   o:['$\\left[-2,\\,3\\right]$','$\\left]-\\infty,\\,-2\\right]\\cup\\left[3,\\,+\\infty\\right[$','$\\left[-2,\\,3\\right[$','$\\left]-2,\\,3\\right]$'],
+   c:0,h:'Resuelva $-5 \\leq 2x-1 \\leq 5$.'},
+  {t:'ej',q:'Resuelva: $|3x+2| > 7$. El conjunto solucion es:',
+   o:['$\\left]-\\infty,\\,-3\\right[\\cup\\left]5/3,\\,+\\infty\\right[$','$\\left[-3,\\,5/3\\right]$','$\\left]-3,\\,5/3\\right[$','$\\left]-\\infty,\\,-3\\right]\\cup\\left[5/3,\\,+\\infty\\right[$'],
+   c:0,h:'Para $|A|>k$: $A>k$ o $A<-k$.'},
+  {t:'ej',q:'Racionalice el denominador de $\\dfrac{1}{\\sqrt{x+2y}+\\sqrt{x}}$:',
+   o:['$\\dfrac{\\sqrt{x+2y}-\\sqrt{x}}{2y}$','$\\dfrac{\\sqrt{x}-\\sqrt{x+2y}}{2y}$','$\\dfrac{\\sqrt{x+2y}-\\sqrt{x}}{-2y}$','$\\dfrac{\\sqrt{x+2y}+\\sqrt{x}}{2y}$'],
+   c:0,h:'Multiplique por el conjugado $\\sqrt{x+2y}-\\sqrt{x}$.'},
+  {t:'ej',q:'Sea $P(x)=x-6$. Simplifique $1 - \\dfrac{1/P(x)}{[-P(x)]^{-1}}$:',
+   o:['$2$','$0$','$(x-7)/(x-6)$','$1$'],
+   c:0,h:'$[-P(x)]^{-1}=-1/P(x)$. Al dividir se obtiene $-1$, luego $1-(-1)=2$.'},
+  /* APLICACIONES */
+  {t:'ap',q:'Simplifique: $\\left(a^{-1}+b^{-1}\\right) \\div \\dfrac{a^2-b^2}{(ab)^3}$',
+   o:['$a^2b^2/(a-b)$','$a^2b^2/(a+b)$','$(a-b)/a^2b^2$','$(a+b)/ab$'],
+   c:0,h:'Escriba $(a+b)/ab$ y multiplique por el reciproco de la division.'},
+  {t:'ap',q:'Un empresario invierte a interes simple del 15% durante 3 anos y obtiene 1485 dolares en intereses. Cuanto invirtio?',
+   o:['3300 dolares','4455 dolares','2970 dolares','1980 dolares'],
+   c:0,h:'Use $I=Prt$: $1485=P \\times 0.15 \\times 3$.'},
+  {t:'ap',q:'El mismo empresario reinvierte 3300 dolares al 13% anual durante 4 anos. Cuantos intereses extra obtiene?',
+   o:['231 dolares','1716 dolares','1485 dolares','201 dolares'],
+   c:0,h:'$I_2=3300 \\times 0.13 \\times 4 = 1716$. Reste $I_1=1485$.'},
+  {t:'ap',q:'Se invierten 4300 dolares durante 3 anos con interes simple y al final se obtiene 5100 dolares. Cual es la tasa anual?',
+   o:['Aprox. 6.2%','Aprox. 8%','Aprox. 5%','Aprox. 12%'],
+   c:0,h:'$I=5100-4300=800$. Luego $r=800/(4300 \\times 3)$.'},
+  {t:'ap',q:'Se invierten 12000 dolares a interes simple anual del 9%. Capital total al cabo de 4 anos:',
+   o:['16320 dolares','14520 dolares','15320 dolares','16200 dolares'],
+   c:0,h:'$A=P(1+rt)=12000(1+0.09 \\times 4)$.'},
+  {t:'ap',q:'Con 12000 dolares al 9% simple anual, cuantos anos para ganar 6000 dolares en intereses?',
+   o:['50/9 aprox. 5.6 anos','5 anos','6 anos','4 anos'],
+   c:0,h:'$6000=12000 \\times 0.09 \\times t$. Despeje $t$.'},
+  {t:'ap',q:'Una persona invierte 1 200 000 colones al r% simple. Al ano reinvierte todo al mismo r%. Los intereses del 2do ano fueron 110 670 colones. Cual es r?',
+   o:['r = 8.5%','r = 9%','r = 8%','r = 10%'],
+   c:0,h:'Intereses 2do ano: $1200000(1+r) \\cdot r=110670$. Resuelva la ecuacion cuadratica.'},
+  {t:'ap',q:'Una empresa produce articulos con costo variable 20 dolares/unidad y costos fijos semanales 1500 dolares. La funcion de costo es:',
+   o:['$C(x)=1500+20x$','$C(x)=40x$','$C(x)=1500+40x$','$C(x)=20x$'],
+   c:0,h:'$C(x)=C_F+c_v \\cdot x$.'},
+  {t:'ap',q:'La empresa vende cada articulo a 40 dolares. La funcion de ingreso es:',
+   o:['$I(x)=40x$','$I(x)=1500+40x$','$I(x)=20x$','$I(x)=40x-1500$'],
+   c:0,h:'$I(x)=p \\cdot x$ con $p=40$.'},
+  {t:'ap',q:'Con $C(x)=1500+20x$ e $I(x)=40x$, la funcion de utilidad simplificada es:',
+   o:['$U(x)=20x-1500$','$U(x)=60x-1500$','$U(x)=20x+1500$','$U(x)=-20x+1500$'],
+   c:0,h:'$U(x)=I(x)-C(x)=40x-(1500+20x)$.'},
+  {t:'ap',q:'A partir de cuantos articulos se obtiene una utilidad de 3000 dolares?',
+   o:['225 articulos','150 articulos','300 articulos','75 articulos'],
+   c:0,h:'Resuelva $20x-1500=3000$.'},
+  {t:'ap',q:'Empresa de balones: precio $p=6000-3x$, costo variable 2820, costo fijo 248625. La funcion de ingreso es:',
+   o:['$I(x)=6000x-3x^2$','$I(x)=6000x$','$I(x)=6000-3x$','$I(x)=2820x+248625$'],
+   c:0,h:'$I(x)=p \\cdot x=(6000-3x)x$.'},
+  {t:'ap',q:'Para la empresa de balones, la funcion de utilidad simplificada es:',
+   o:['$U(x)=-3x^2+3180x-248625$','$U(x)=3x^2-3180x+248625$','$U(x)=-3x^2+3180x$','$U(x)=3180x-248625$'],
+   c:0,h:'$U=I-C=(6000x-3x^2)-(248625+2820x)$.'},
+  {t:'ap',q:'Cuantos balones debe producir la empresa para obtener utilidad positiva?',
+   o:['$85 < x < 975$','$x<85$ o $x>975$','$x>85$','$x<975$'],
+   c:0,h:'Resuelva $-3x^2+3180x-248625>0$; $\\Delta=890^2$.'},
+  {t:'ap',q:'Empresa de bibliotecas: costos fijos 6 000 000 colones; materiales 75 000/unidad. La funcion de costo es:',
+   o:['$C(x)=6000000+75000x$','$C(x)=75000x$','$C(x)=145000x$','$C(x)=6000000x$'],
+   c:0,h:'$C(x)=C_F+c_v \\cdot x$.'},
+  {t:'ap',q:'Cada biblioteca se vende a 145 000 colones. Cuantas deben producirse para no tener perdidas?',
+   o:['86 bibliotecas','85 bibliotecas','100 bibliotecas','80 bibliotecas'],
+   c:0,h:'Resuelva $145000x \\geq 6000000+75000x$. $x$ debe ser entero.'},
+  {t:'ap',q:'Una empresa tiene $U(x)=-x^2+100x-2400$. Para que valores de $x$ hay utilidad positiva?',
+   o:['$40 < x < 60$','$x<40$ o $x>60$','$x>40$','$0<x<60$'],
+   c:0,h:'Resuelva $x^2-100x+2400<0$. $\\Delta=10000-9600=400$.'},
+  {t:'ap',q:'Empresa de camisas: $p=2000-2x$, costo variable 800/unidad, costo fijo 50000. La funcion de utilidad es:',
+   o:['$U(x)=-2x^2+1200x-50000$','$U(x)=-2x^2+1200x+50000$','$U(x)=2x^2-1200x+50000$','$U(x)=-2x^2-1200x-50000$'],
+   c:0,h:'$I=x(2000-2x)$, $C=50000+800x$. $U=I-C$.'},
+  {t:'ap',q:'Se invierten 5000 dolares a interes simple del 6% anual. En cuantos anos se tendra un capital de 6800 dolares?',
+   o:['6 anos','4 anos','5 anos','8 anos'],
+   c:0,h:'$I=6800-5000=1800$. $1800=5000 \\times 0.06 \\times t$.'},
+  {t:'ap',q:'Para hacer crecer 8000 dolares a 9200 dolares en 3 anos con interes simple, la tasa anual debe ser:',
+   o:['5%','6%','4%','8%'],
+   c:0,h:'$I=1200$. $r=1200/(8000 \\times 3)$.'},
+  {t:'ap',q:'Banco ofrece 9% simple anual. Con 12000 dolares invertidos, cuanto se gana en 4 anos?',
+   o:['4320 dolares','5000 dolares','4000 dolares','3600 dolares'],
+   c:0,h:'$I=12000 \\times 0.09 \\times 4$.'},
+  {t:'ap',q:'Empresa con $p=50$ y $C(x)=800+30x$. Cuantas unidades para el punto de equilibrio?',
+   o:['40 unidades','20 unidades','50 unidades','80 unidades'],
+   c:0,h:'Resuelva $50x=800+30x$.'}
+];
+
+
+
+/* ── ESTADO ── */
+var ST={
+  asocie:{ok:[],att:0,ts:''},
+  sel:{corr:0,tot:Q.length,det:[],done:false,ts:''}
+};
+var visited={};
+
+/* ── NAVEGACION ── */
+function openTab(t){
+  document.getElementById('mainMenu').style.display='none';
+  document.getElementById('tabsArea').style.display='block';
+  switchTab(t);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function switchTab(t){
+  var btns=document.querySelectorAll('.tb');
+  for(var i=0;i<btns.length;i++)btns[i].classList.remove('active');
+  var secs=document.querySelectorAll('.tc');
+  for(var i=0;i<secs.length;i++)secs[i].classList.remove('active');
+  document.querySelector('.tb[data-tab="'+t+'"]').classList.add('active');
+  document.getElementById('tab-'+t).classList.add('active');
+  visited[t]=true;
+  updateProgress();
+  if(t==='resultados')buildResults();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goHome(){
+  document.getElementById('tabsArea').style.display='none';
+  document.getElementById('mainMenu').style.display='block';
+  updateMenuCards();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+var tbs=document.querySelectorAll('.tb');
+for(var _ti=0;_ti<tbs.length;_ti++){
+  (function(btn){btn.addEventListener('click',function(){switchTab(btn.getAttribute('data-tab'));});})(tbs[_ti]);
+}
+function updateMenuCards(){
+  var map={asocie:ST.asocie.ok.length>0,seleccion:ST.sel.corr>0||ST.sel.done,resultados:!!visited.resultados};
+  var keys=Object.keys(map);
+  for(var i=0;i<keys.length;i++){
+    var el=document.getElementById('ml-'+keys[i]);
+    if(el){var b=el.textContent.replace(' \u2713','');el.textContent=b+(map[keys[i]]?' \u2713':'');}
+  }
+}
+function updateProgress(){
+  var n=Object.keys(visited).length;
+  document.getElementById('pfill').style.width=((n/3)*100)+'%';
+  document.getElementById('ptext').textContent='Actividades visitadas: '+n+' de 3';
+}
+
+/* ── ASOCIE ── */
+var sLId=null,sLEl=null,cpairs=[],cattempts=0,_lo,_ro;
+function initAsocie(){
+  _lo=pairs.map(function(p){return p.id;});
+  _ro=shuffle(pairs.map(function(p){return p.id;}));
+  sLId=null;sLEl=null;cpairs=[];cattempts=0;
+  ST.asocie={ok:[],att:0,ts:''};
+  renderAsocie();
+}
+function hasPair(id){for(var i=0;i<cpairs.length;i++)if(cpairs[i]===id)return true;return false;}
+function renderAsocie(){
+  var mL=document.getElementById('mLeft'),mR=document.getElementById('mRight');
+  mL.innerHTML='';mR.innerHTML='';
+  _lo.forEach(function(id){
+    var p=pairs.filter(function(x){return x.id===id;})[0];
+    var d=document.createElement('div');
+    d.className='mcard'+(hasPair(id)?' correct':'');
+    d.innerHTML=M(p.concept);
+    if(!hasPair(id)){(function(pid,el){el.addEventListener('click',function(){selL(pid,el);});})(id,d);}
+    mL.appendChild(d);
+  });
+  _ro.forEach(function(id){
+    var p=pairs.filter(function(x){return x.id===id;})[0];
+    var d=document.createElement('div');
+    d.className='mcard'+(hasPair(id)?' correct':'');
+    d.innerHTML=M(p.def);
+    if(!hasPair(id)){(function(pid,el){el.addEventListener('click',function(){selR(pid,el);});})(id,d);}
+    mR.appendChild(d);
+  });
+}
+function selL(id,el){if(sLEl)sLEl.classList.remove('selected');sLId=id;sLEl=el;el.classList.add('selected');}
+function selR(id,el){
+  if(sLId===null)return;
+  cattempts++;
+  var ok=sLId===id;
+  var lr=sLEl;
+  if(ok){
+    cpairs.push(id);sLId=null;sLEl=null;
+    ST.asocie={ok:cpairs.slice(),att:cattempts,ts:nowStr()};
+    renderAsocie();
+  }else{
+    lr.classList.add('wrong');el.classList.add('wrong');
+    setTimeout(function(){lr.classList.remove('wrong','selected');el.classList.remove('wrong');},900);
+    sLId=null;sLEl=null;ST.asocie.att=cattempts;
+  }
+}
+document.getElementById('resetAsocieBtn').addEventListener('click',function(){
+  cpairs=[];cattempts=0;sLId=null;sLEl=null;
+  _ro=shuffle(pairs.map(function(p){return p.id;}));
+  ST.asocie={ok:[],att:0,ts:''};renderAsocie();
+});
+
+/* ── MCQ ── */
+var mqr=[];
+function initMCQ(){
+  mqr=[];
+  for(var i=0;i<Q.length;i++){
+    var q=Q[i];
+    var opts=[];
+    for(var j=0;j<q.o.length;j++)opts.push({text:q.o[j],correct:j===q.c});
+    mqr.push({t:q.t,q:q.q,shuffled:shuffle(opts),answered:false,wasOk:false,sel:'',hint:q.h});
+  }
+  renderMCQ();
+  var sb=document.getElementById('mcqScoreBox');sb.textContent='';sb.style.display='none';
+  updateQCtr();
+}
+function updateQCtr(){
+  var ans=mqr.filter(function(q){return q.answered;}).length;
+  document.getElementById('qCtr').textContent='Respondidas: '+ans+' / '+mqr.length;
+}
+function renderMCQ(){
+  var list=document.getElementById('mcqList');list.innerHTML='';
+  for(var qi=0;qi<mqr.length;qi++){
+    (function(qi){
+      var q=mqr[qi];
+      var card=document.createElement('div');card.className='qcard';
+      var tag=document.createElement('span');
+      tag.className='qtag '+(q.t==='ej'?'ej':'ap');
+      tag.textContent=q.t==='ej'?'Ejercicio':'Aplicacion';
+      card.appendChild(tag);
+      var qd=document.createElement('div');qd.className='qq';
+      qd.innerHTML=M((qi+1)+'. '+q.q);card.appendChild(qd);
+      var od=document.createElement('div');od.className='qopts';
+      for(var oi=0;oi<q.shuffled.length;oi++){
+        (function(opt){
+          var b=document.createElement('button');b.type='button';b.className='qopt';
+          b.innerHTML=M(opt.text);
+          b.addEventListener('click',function(){answerQ(qi,opt,b,od,q);});
+          od.appendChild(b);
+        })(q.shuffled[oi]);
+      }
+      card.appendChild(od);
+      var fb=document.createElement('div');fb.className='qfb';fb.id='qfb-'+qi;card.appendChild(fb);
+      list.appendChild(card);
+    })(qi);
+  }
+}
+function answerQ(qi,opt,btn,od,q){
+  if(q.answered)return;
+  q.answered=true;q.wasOk=opt.correct;q.sel=opt.text;
+  var children=od.children;
+  for(var i=0;i<children.length;i++){
+    children[i].disabled=true;
+    if(q.shuffled[i].correct)children[i].classList.add('correct');
+  }
+  if(!opt.correct)btn.classList.add('wrong');
+  document.getElementById('qfb-'+qi).innerHTML=opt.correct?'&#10003; Correcto!':'&#128161; Pista: '+M(q.hint);
+  var corr=mqr.filter(function(r){return r.wasOk;}).length;
+  var det=[];
+  for(var i=0;i<mqr.length;i++){
+    det.push({n:i+1,tipo:mqr[i].t==='ej'?'Ejercicio':'Aplicacion',q:mqr[i].q,sel:mqr[i].sel||'--',ok:mqr[i].wasOk,hint:mqr[i].hint});
+  }
+  ST.sel={corr:corr,tot:Q.length,done:mqr.every(function(r){return r.answered;}),det:det,ts:nowStr()};
+  updateQCtr();
+}
+document.getElementById('seeScoreBtn').addEventListener('click',function(){
+  var c=mqr.filter(function(r){return r.wasOk;}).length;
+  var sb=document.getElementById('mcqScoreBox');
+  sb.innerHTML=M('\\text{Puntaje: }'+c+'/'+mqr.length+' = '+(c/mqr.length*100).toFixed(1)+'\\%');
+  sb.style.display='block';
+});
+
+
+
+/* ── RESULTADOS ── */
+function calcScore(){
+  var sc=Math.round(
+    (ST.asocie.ok.length/pairs.length)*30+
+    (ST.sel.corr/ST.sel.tot)*70
+  );return sc>100?100:sc;
+}
+function getNivel(s){
+  if(s>=80)return{l:'Avanzado',c:'nb-a'};
+  if(s>=50)return{l:'Intermedio',c:'nb-i'};
+  return{l:'Basico',c:'nb-b'};
+}
+function getName(){return document.getElementById('nameInp').value.trim()||'Estudiante';}
+function buildResults(){
+  var sc=calcScore(),nv=getNivel(sc);
+  var mg=document.getElementById('mgrid');mg.innerHTML='';
+  var metrics=[
+    {v:ST.asocie.ok.length>0?(ST.asocie.ok.length+'/'+pairs.length):'--',l:'Asocie'},
+    {v:(ST.sel.corr>0||ST.sel.done)?(ST.sel.corr+'/'+ST.sel.tot):'--',l:'Seleccion unica'},
+    {v:sc,l:'Puntaje /100'}
+  ];
+  for(var i=0;i<metrics.length;i++){
+    mg.innerHTML+='<div class="mmet"><div class="v">'+metrics[i].v+'</div><div class="l">'+metrics[i].l+'</div></div>';
+  }
+  document.getElementById('gsNum').textContent=sc;
+  document.getElementById('nBadge').innerHTML='<span class="nb '+nv.c+'">Nivel: '+nv.l+'</span>';
+  var tb=document.getElementById('rtBody');tb.innerHTML='';
+  var rows=[
+    {a:'1. Asocie',r:ST.asocie.ok.length>0?ST.asocie.ok.length+'/6 pares':'Pendiente',d:ST.asocie.ok.length>0?'Intentos: '+ST.asocie.att:'--',p:ST.asocie.ok.length>0?Math.round((ST.asocie.ok.length/pairs.length)*30)+'/30':'--'},
+    {a:'2. Seleccion',r:(ST.sel.corr>0||ST.sel.done)?ST.sel.corr+'/'+ST.sel.tot:'Pendiente',d:ST.sel.ts||'--',p:ST.sel.corr>0?Math.round((ST.sel.corr/ST.sel.tot)*70)+'/70':'--'}
+  ];
+  for(var i=0;i<rows.length;i++){
+    var tr=document.createElement('tr');
+    var rw=rows[i];
+    tr.innerHTML='<td>'+rw.a+'</td><td'+(rw.r==='Pendiente'?' style="color:#888;font-style:italic"':'')+'>'+rw.r+'</td><td>'+rw.d+'</td><td>'+rw.p+'</td>';
+    tb.appendChild(tr);
+  }
+  updateMenuCards();
+}
+
+/* ── PDF ── */
+document.getElementById('dlPdf').addEventListener('click',function(){
+  document.getElementById('dlWarn').textContent='';
+  var sc=calcScore(),nv=getNivel(sc),seen=countSeen(),nm=getName();
+  var detHtml='';
+  if(ST.sel.det.length){
+    detHtml='<h3 style="color:#003087;margin:14px 0 5px;font-size:.88rem;">Detalle Seleccion unica</h3>'+
+      '<table style="width:100%;border-collapse:collapse;font-size:.74rem;"><thead><tr style="background:#003087;color:#fff;">'+
+      '<th style="padding:5px;border:1px solid #dde;">N.</th><th style="padding:5px;border:1px solid #dde;">Tipo</th>'+
+      '<th style="padding:5px;border:1px solid #dde;">Pregunta</th><th style="padding:5px;border:1px solid #dde;">OK</th></tr></thead><tbody>';
+    for(var i=0;i<ST.sel.det.length;i++){
+      var d=ST.sel.det[i];
+      detHtml+='<tr style="background:'+(i%2?'#f4f6fb':'#fff')+'">'+
+        '<td style="padding:5px;border:1px solid #dde;">'+d.n+'</td>'+
+        '<td style="padding:5px;border:1px solid #dde;">'+d.tipo+'</td>'+
+        '<td style="padding:5px;border:1px solid #dde;">'+escXml(d.q.replace(/\$[^$]+\$/g,'[formula]').substring(0,60))+'...</td>'+
+        '<td style="padding:5px;border:1px solid #dde;">'+(d.ok?'Si':'No')+'</td></tr>';
+    }
+    detHtml+='</tbody></table>';
+  }
+  document.getElementById('printContent').innerHTML=
+    '<div style="font-family:Arial,sans-serif;color:#1a1a2e;">'+
+    '<div style="background:#003087;color:#fff;padding:14px;border-radius:8px;margin-bottom:12px;text-align:center;">'+
+    '<div style="font-size:.88rem;opacity:.9;">Universidad Estatal a Distancia - Catedra de Matematicas Aplicadas</div>'+
+    '<div style="font-size:1.05rem;font-weight:bold;margin-top:4px;">Matematica para Administradores - Codigo 0491</div>'+
+    '</div>'+
+    '<div style="background:#f4f6fb;padding:10px 13px;border-radius:7px;font-size:.82rem;line-height:1.7;margin-bottom:12px;">'+
+    '<strong>Estudiante:</strong> '+escXml(nm)+'<br>'+
+    '<strong>Fecha:</strong> '+nowStr()+'<br>'+
+    '<strong>Elaborado por:</strong> MSc. Sarita Melissa Cubero Solano - 2026'+
+    '</div>'+
+    '<div style="text-align:center;background:#003087;color:#fff;padding:15px;border-radius:10px;margin-bottom:12px;">'+
+    '<div>Puntaje global</div>'+
+    '<div style="font-size:1.9rem;font-weight:bold;color:#F5A800;">'+sc+' / 100</div>'+
+    '<span style="display:inline-block;padding:3px 13px;border-radius:13px;font-weight:bold;font-size:.85rem;background:'+(sc>=80?'#d4edda':sc>=50?'#cce5ff':'#fff3cd')+';color:'+(sc>=80?'#155724':sc>=50?'#004085':'#856404')+'>Nivel: '+nv.l+'</span>'+
+    '</div>'+
+    '<table style="width:100%;border-collapse:collapse;font-size:.79rem;margin-bottom:12px;">'+
+    '<thead><tr style="background:#003087;color:#fff;"><th style="padding:6px;border:1px solid #dde;">Actividad</th><th style="padding:6px;border:1px solid #dde;">Resultado</th><th style="padding:6px;border:1px solid #dde;">Puntaje</th></tr></thead><tbody>'+
+    '<tr><td style="padding:6px;border:1px solid #dde;">Asocie</td><td style="padding:6px;border:1px solid #dde;">'+(ST.asocie.ok.length>0?ST.asocie.ok.length+'/6 pares':'Pendiente')+'</td><td style="padding:6px;border:1px solid #dde;">'+(ST.asocie.ok.length>0?Math.round((ST.asocie.ok.length/pairs.length)*20)+'/20':'--')+'</td></tr>'+
+    '<tr style="background:#f4f6fb"><td style="padding:6px;border:1px solid #dde;">Seleccion unica</td><td style="padding:6px;border:1px solid #dde;">'+(ST.sel.corr>0||ST.sel.done?ST.sel.corr+'/40':'Pendiente')+'</td><td style="padding:6px;border:1px solid #dde;">'+(ST.sel.corr>0?Math.round((ST.sel.corr/ST.sel.tot)*60)+'/60':'--')+'</td></tr>'+
+    '<tr><td style="padding:6px;border:1px solid #dde;">Fichas de repaso</td><td style="padding:6px;border:1px solid #dde;">'+(ST.flash.flips>0?seen+'/12 vistas':'Pendiente')+'</td><td style="padding:6px;border:1px solid #dde;">'+(ST.flash.flips>0?Math.round((seen/FC.length)*20)+'/20':'--')+'</td></tr>'+
+    '</tbody></table>'+
+    detHtml+
+    '<p style="margin-top:14px;font-size:.68rem;color:#999;border-top:1px solid #dde;padding-top:7px;">'+
+    'Generado automaticamente - Cuaderno Interactivo UNED - Matematica para Administradores Codigo 0491. MSc. Sarita Melissa Cubero Solano, 2026.</p>'+
+    '</div>';
+  document.getElementById('printOverlay').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ── EXCEL ── */
+document.getElementById('dlXls').addEventListener('click',function(){
+  document.getElementById('dlWarn').textContent='';
+  var sc=calcScore(),nv=getNivel(sc),seen=countSeen(),nm=getName();
+  function row(){
+    var vals=Array.prototype.slice.call(arguments);
+    return '<Row>'+vals.map(function(x){return '<Cell><Data ss:Type="String">'+escXml(String(x).replace(/\$[^$]+\$/g,'').substring(0,120))+'</Data></Cell>';}).join('')+'</Row>';
+  }
+  function hrow(){
+    var vals=Array.prototype.slice.call(arguments);
+    return '<Row>'+vals.map(function(x){return '<Cell ss:StyleID="h"><Data ss:Type="String">'+escXml(String(x))+'</Data></Cell>';}).join('')+'</Row>';
+  }
+  var selRows='';
+  for(var i=0;i<ST.sel.det.length;i++){
+    var d=ST.sel.det[i];
+    selRows+=row(d.n,d.tipo,d.q.replace(/\$[^$]+\$/g,''),d.sel.replace(/\$[^$]+\$/g,''),d.ok?'Si':'No');
+  }
+  if(!selRows)selRows=row('Sin datos','--','--','--','--');
+  var flashRows='';
+  for(var i=0;i<FC.length;i++){
+    flashRows+=row(i+1,FC[i].f.replace(/\$[^$]+\$/g,''),ST.flash.seen[i]?'Si':'No',ST.flash.seen[i]?1:0);
+  }
+  var xls='<?xml version="1.0" encoding="UTF-8"?><?mso-application progid="Excel.Sheet"?>'+
+    '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">'+
+    '<Styles><Style ss:ID="h"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#003087" ss:Pattern="Solid"/></Style></Styles>'+
+    '<Worksheet ss:Name="Resumen"><Table>'+
+    hrow('Campo','Valor')+
+    row('Estudiante',nm)+row('Curso','Matematica para Administradores I - Codigo 0491')+
+    row('Institucion','UNED de Costa Rica')+row('Fecha',nowStr())+
+    row('Puntaje global',sc+'/100')+row('Nivel',nv.l)+
+    row('Elaborado por','MSc. Sarita Melissa Cubero Solano - 2026')+
+    hrow('Actividad','Resultado','Puntaje parcial')+
+    row('Asocie',ST.asocie.ok.length>0?ST.asocie.ok.length+'/6':'Pendiente',ST.asocie.ok.length>0?Math.round((ST.asocie.ok.length/pairs.length)*20)+'/20':'--')+
+    row('Seleccion unica',ST.sel.corr>0||ST.sel.done?ST.sel.corr+'/40':'Pendiente',ST.sel.corr>0?Math.round((ST.sel.corr/ST.sel.tot)*60)+'/60':'--')+
+    row('Fichas',ST.flash.flips>0?seen+'/12':'Pendiente',ST.flash.flips>0?Math.round((seen/FC.length)*20)+'/20':'--')+
+    row('Nota','Generado automaticamente - Cuaderno Interactivo UNED. MSc. Sarita Melissa Cubero Solano 2026','--')+
+    '</Table></Worksheet>'+
+    '<Worksheet ss:Name="Seleccion Unica"><Table>'+
+    hrow('N.','Tipo','Pregunta','Respuesta seleccionada','Correcta')+selRows+
+    '</Table></Worksheet>'+
+    '<Worksheet ss:Name="Fichas"><Table>'+
+    hrow('N.','Concepto','Vio el reverso','Registrado')+flashRows+
+    '</Table></Worksheet>'+
+    '<Worksheet ss:Name="Nivel"><Table>'+
+    hrow('Puntaje','Nivel','Descripcion')+
+    row(sc+'/100',nv.l,sc>=80?'Domina los contenidos.':sc>=50?'Comprende los fundamentos.':'Requiere refuerzo.')+
+    hrow('Escala','','')+row('80-100','Avanzado','Domina todos los contenidos.')+
+    row('50-79','Intermedio','Comprende los fundamentos.')+row('0-49','Basico','Requiere refuerzo.')+
+    '</Table></Worksheet>'+
+    '</Workbook>';
+  var uri='data:application/vnd.ms-excel;charset=utf-8,'+encodeURIComponent(xls);
+  var a=document.createElement('a');
+  a.href=uri;a.download='Informe_'+nm.replace(/\s+/g,'_')+'_MAT0491.xls';a.target='_blank';
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){a.remove();},1000);
+});
+
+/* ── EXPONER FUNCIONES GLOBALES (requerido por onclick en HTML) ── */
+window.openTab  = openTab;
+window.switchTab = switchTab;
+window.goHome   = goHome;
+
+/* ── INIT ── */
+initAsocie();initMCQ();updateProgress();
+document.getElementById('mainMenu').style.display='block';
+
+})();
+</script>
+</body>
+</html>
