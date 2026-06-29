@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Cuaderno UNED - Matematica para Administradores 0491</title>
+<title>Cuaderno UNED - Matemática para Administradores 0491</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <style>
@@ -103,6 +103,7 @@ table.rt th{background:var(--azul);color:#fff;}
 table.rt tr:nth-child(even){background:var(--gris);}
 .drow{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;margin-top:11px;}
 .wmsg{color:var(--rojo);font-size:.81rem;text-align:center;margin-top:7px;}
+.smsg{color:var(--verde);font-size:.81rem;text-align:center;margin-top:7px;}
 #printOverlay{display:none;position:fixed;inset:0;background:rgba(0,20,70,.9);z-index:8888;padding:13px;overflow-y:auto;}
 .pbox{background:#fff;border-radius:12px;max-width:700px;margin:0 auto;padding:20px;}
 .pclose{display:flex;gap:10px;justify-content:flex-end;margin-bottom:11px;position:sticky;top:0;background:#fff;z-index:1;padding-bottom:7px;}
@@ -121,149 +122,18 @@ footer{background:var(--gris);padding:9px 14px;border-top:2px solid var(--azul);
 
 <div class="topbar">
   <div class="hdr-top">
-    <div style="flex-shrink:0;">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 220" width="160" height="104">
-  <defs>
-    <!-- Degradado principal: azul marino → violeta → naranja → rojo -->
-    <linearGradient id="g1" x1="0%" y1="30%" x2="100%" y2="70%">
-      <stop offset="0%"   stop-color="#1a2b6b"/>
-      <stop offset="28%"  stop-color="#2a2070"/>
-      <stop offset="50%"  stop-color="#6b2080"/>
-      <stop offset="72%"  stop-color="#d04010"/>
-      <stop offset="100%" stop-color="#c01008"/>
-    </linearGradient>
-    <!-- Degradado esfera izquierda azul oscuro -->
-    <radialGradient id="gs1" cx="38%" cy="32%" r="62%">
-      <stop offset="0%"   stop-color="#3a4fa0"/>
-      <stop offset="55%"  stop-color="#1a2b6b"/>
-      <stop offset="100%" stop-color="#0a1040"/>
-    </radialGradient>
-    <!-- Degradado esfera derecha naranja-rojo -->
-    <radialGradient id="gs2" cx="38%" cy="32%" r="62%">
-      <stop offset="0%"   stop-color="#ff7030"/>
-      <stop offset="55%"  stop-color="#d83010"/>
-      <stop offset="100%" stop-color="#a00808"/>
-    </radialGradient>
-    <!-- Sombra paralela (drop shadow flotante) -->
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="4.5" result="blur"/>
-      <feOffset dx="2" dy="6" result="offset"/>
-      <feFlood flood-color="#888" flood-opacity="0.28" result="color"/>
-      <feComposite in="color" in2="offset" operator="in" result="shadow"/>
-      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <!-- Máscara para efecto 3D: brillo interior superior de la cinta -->
-    <linearGradient id="shine" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#fff" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-    </linearGradient>
-    <clipPath id="clip-left">
-      <rect x="0" y="0" width="162" height="220"/>
-    </clipPath>
-    <clipPath id="clip-right">
-      <rect x="162" y="0" width="178" height="220"/>
-    </clipPath>
-  </defs>
-
-  <!-- ═══ SOMBRA BASE (capa flotante) ═══ -->
-  <ellipse cx="170" cy="170" rx="130" ry="10"
-           fill="#bbb" opacity="0.22" filter="url(#shadow)"/>
-
-  <!-- ═══ SÍMBOLO DE INFINITO (lemniscata tridimensional) ═══
-       Construido con dos trayectorias de Bézier entrelazadas:
-       Trayectoria exterior (grosor exterior) y trayectoria interior,
-       generando la ilusión de cinta/banda 3D.
-       Centro de cruce: aproximado en x≈162, y≈88                    -->
-
-  <!-- BANDA PRINCIPAL — trazo grueso con degradado completo -->
-  <g filter="url(#shadow)">
-
-    <!-- Lazo DERECHO (naranja→rojo) — dibujado primero (capa inferior) -->
-    <path d="
-      M162,88
-      C162,38  230,10  268,42
-      C306,74  306,118 268,138
-      C230,158 170,130 162,88
-      Z"
-      fill="none"
-      stroke="url(#g1)" stroke-width="36"
-      stroke-linecap="round" stroke-linejoin="round"
-      clip-path="url(#clip-right)"/>
-
-    <!-- Lazo IZQUIERDO (azul→violeta) — dibujado encima en su mitad -->
-    <path d="
-      M162,88
-      C162,38   94,10   56,42
-      C18,74    18,118  56,138
-      C94,158  154,130  162,88
-      Z"
-      fill="none"
-      stroke="url(#g1)" stroke-width="36"
-      stroke-linecap="round" stroke-linejoin="round"
-      clip-path="url(#clip-left)"/>
-
-    <!-- Re-dibujar la parte superior del lazo DERECHO encima del izquierdo
-         (cruce superior: naranja pasa POR ENCIMA del azul) -->
-    <path d="
-      M162,88
-      C162,38  230,10  268,42
-      C306,74  270,50  230,46"
-      fill="none"
-      stroke="url(#g1)" stroke-width="36"
-      stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- Brillo interior superior (efecto 3D / volumen de cinta) -->
-    <path d="
-      M162,82
-      C162,46   94,18   56,48
-      C30,68   22,100  48,128"
-      fill="none"
-      stroke="url(#shine)" stroke-width="14"
-      stroke-linecap="round"/>
-    <path d="
-      M162,82
-      C162,46  230,18  268,48
-      C294,68  302,100 276,128"
-      fill="none"
-      stroke="url(#shine)" stroke-width="14"
-      stroke-linecap="round"/>
-  </g>
-
-  <!-- ═══ ESFERA IZQUIERDA — extremo superior izquierdo (azul oscuro) ═══ -->
-  <circle cx="56" cy="42" r="17" fill="url(#gs1)" filter="url(#shadow)"/>
-  <!-- Destello especular esfera izquierda -->
-  <ellipse cx="50" cy="36" rx="5.5" ry="3.5"
-           fill="white" opacity="0.45" transform="rotate(-30 50 36)"/>
-
-  <!-- ═══ ESFERA DERECHA — extremo inferior derecho (naranja-rojo) ═══ -->
-  <circle cx="268" cy="138" r="17" fill="url(#gs2)" filter="url(#shadow)"/>
-  <!-- Destello especular esfera derecha -->
-  <ellipse cx="262" cy="132" rx="5.5" ry="3.5"
-           fill="white" opacity="0.45" transform="rotate(-30 262 132)"/>
-
-  <!-- ═══ TIPOGRAFÍA — estilo Serif, alineada a la izquierda ═══ -->
-  <text x="28" y="186"
-        font-family="'Times New Roman', Georgia, 'Book Antiqua', serif"
-        font-size="15" fill="#000000" letter-spacing="0.4">Catedra de</text>
-  <text x="28" y="207"
-        font-family="'Times New Roman', Georgia, 'Book Antiqua', serif"
-        font-size="19" font-weight="bold" fill="#000000" letter-spacing="0.3">Matem&#225;ticas Aplicadas</text>
-</svg>
+    <div style="flex-shrink:0;padding:4px 8px;">
+      <span style="font-size:.7rem;font-weight:bold;color:var(--azul);line-height:1.4;">C&aacute;tedra de<br>Matem&aacute;ticas Aplicadas</span>
     </div>
     <div class="hdr-center">
       <div class="inst" style="font-size:.82rem;letter-spacing:1.5px;font-weight:900;">UNED &nbsp;&mdash;&nbsp; ECEN</div>
       <div class="inst" style="font-size:.76rem;">Universidad Estatal a Distancia</div>
       <div class="inst" style="color:#b8860b;font-size:.76rem;letter-spacing:.5px;">C&aacute;tedra de Matem&aacute;ticas Aplicadas</div>
     </div>
-    <div>
-      <svg viewBox="0 0 110 70" width="88" height="56">
-        <rect x="1" y="1" width="108" height="68" fill="none" stroke="#003087" stroke-width="2.5"/>
-        <text x="55" y="33" font-size="24" font-weight="900" fill="#003087" text-anchor="middle" font-family="Arial" letter-spacing="2">UNED</text>
-        <line x1="8" y1="39" x2="102" y2="39" stroke="#003087" stroke-width="1.5"/>
-        <text x="55" y="50" font-size="5.8" fill="#003087" text-anchor="middle" font-family="Arial">UNIVERSIDAD ESTATAL A DISTANCIA</text>
-        <text x="55" y="60" font-size="5.2" fill="#555" text-anchor="middle" font-family="Arial">Institucion Benemerita de la Educacion</text>
-        <text x="55" y="68" font-size="5.2" fill="#555" text-anchor="middle" font-family="Arial">y la Cultura - Costa Rica</text>
-      </svg>
+    <!-- LOGO DERECHO: UNED texto -->
+    <div style="flex-shrink:0;padding:4px 10px;text-align:center;border-left:2px solid #e0e4ee;">
+      <span style="font-size:1.15rem;font-weight:900;color:var(--azul);letter-spacing:2px;display:block;">UNED</span>
+      <span style="font-size:.48rem;font-weight:bold;color:var(--azul);letter-spacing:.3px;line-height:1.35;display:block;">UNIVERSIDAD ESTATAL<br>A DISTANCIA</span>
     </div>
   </div>
   <div class="hdr-bar">
@@ -276,11 +146,78 @@ footer{background:var(--gris);padding:9px 14px;border-top:2px solid var(--azul);
   </div>
 </div>
 
+<!-- ═══ PANTALLA DE REGISTRO — datos obligatorios antes de continuar ═══ -->
+<div id="registroScreen" style="display:none;max-width:500px;margin:28px auto;padding:0 16px 30px;">
+  <div style="background:#fff;border-radius:14px;box-shadow:0 4px 20px rgba(0,0,60,.12);overflow:hidden;">
+    <!-- Encabezado del registro -->
+    <div style="background:var(--azul);color:#fff;padding:18px 20px;text-align:center;">
+      <div style="font-size:1.6rem;margin-bottom:4px;">&#128221;</div>
+      <h2 style="font-size:1rem;font-weight:bold;margin:0 0 4px;">Datos del estudiante</h2>
+      <p style="font-size:.78rem;opacity:.85;margin:0;">Complete todos los campos para iniciar la práctica</p>
+    </div>
+    <!-- Formulario -->
+    <div style="padding:22px 20px;display:flex;flex-direction:column;gap:15px;">
+      <!-- Nombre -->
+      <div>
+        <label style="display:block;font-size:.82rem;font-weight:bold;color:var(--azul);margin-bottom:5px;">
+          &#128100; Nombre completo <span style="color:var(--rojo);">*</span>
+        </label>
+        <input type="text" id="regNombre"
+          placeholder="Ej: María Rodríguez Mora"
+          autocomplete="name"
+          style="width:100%;padding:10px 12px;border:2px solid #c8d0e0;border-radius:8px;font-size:15px;outline:none;transition:border-color .2s;"
+          onfocus="this.style.borderColor='#003087'"
+          onblur="this.style.borderColor='#c8d0e0'">
+        <span id="errNombre" style="display:none;color:var(--rojo);font-size:.75rem;margin-top:3px;">&#9888; Campo obligatorio</span>
+      </div>
+      <!-- Docente -->
+      <div>
+        <label style="display:block;font-size:.82rem;font-weight:bold;color:var(--azul);margin-bottom:5px;">
+          &#127891; Nombre del docente <span style="color:var(--rojo);">*</span>
+        </label>
+        <input type="text" id="regDocente"
+          placeholder="Ej: MSc. Sarita Cubero Solano"
+          style="width:100%;padding:10px 12px;border:2px solid #c8d0e0;border-radius:8px;font-size:15px;outline:none;transition:border-color .2s;"
+          onfocus="this.style.borderColor='#003087'"
+          onblur="this.style.borderColor='#c8d0e0'">
+        <span id="errDocente" style="display:none;color:var(--rojo);font-size:.75rem;margin-top:3px;">&#9888; Campo obligatorio</span>
+      </div>
+      <!-- Clase / Plataforma -->
+      <div>
+        <label style="display:block;font-size:.82rem;font-weight:bold;color:var(--azul);margin-bottom:5px;">
+          &#128187; Clase / Grupo de plataforma <span style="color:var(--rojo);">*</span>
+        </label>
+        <input type="text" id="regClase"
+          placeholder="Ej: Grupo 001 — MAT0491-I-2026"
+          style="width:100%;padding:10px 12px;border:2px solid #c8d0e0;border-radius:8px;font-size:15px;outline:none;transition:border-color .2s;"
+          onfocus="this.style.borderColor='#003087'"
+          onblur="this.style.borderColor='#c8d0e0'">
+        <span id="errClase" style="display:none;color:var(--rojo);font-size:.75rem;margin-top:3px;">&#9888; Campo obligatorio</span>
+      </div>
+      <!-- Correo (fijo, solo lectura) -->
+      <div style="background:#f4f6fb;border-radius:8px;padding:10px 12px;border:2px solid #e0e4ee;">
+        <p style="font-size:.78rem;color:#555;margin:0 0 3px;">
+          <strong style="color:var(--azul);">&#128231; Correo de envío</strong> <span style="color:#888;">(fijo institucional)</span>
+        </p>
+        <p style="font-size:.9rem;font-weight:bold;color:var(--azul);margin:0;">scubero@uned.ac.cr</p>
+      </div>
+      <!-- Botón continuar -->
+      <button id="regContinuarBtn"
+        style="background:var(--azul);color:#fff;border:none;padding:13px;border-radius:9px;font-size:.95rem;font-weight:bold;cursor:pointer;width:100%;margin-top:4px;transition:background .2s;"
+        onmouseover="this.style.background='#00205a'"
+        onmouseout="this.style.background='var(--azul)'">
+        Iniciar práctica &#8594;
+      </button>
+    </div>
+  </div>
+</div>
+
 <div id="mainMenu">
   <p class="menu-title" style="margin-top:18px;">&#128218; Menu principal &mdash; seleccione una actividad</p>
   <div class="menu-grid">
-    <div class="mc" onclick="openTab('asocie')"><div class="icon">&#128279;</div><div class="lbl" id="ml-asocie">Asocie</div><div class="sub2">Conceptos y definiciones clave</div></div>
-    <div class="mc" onclick="openTab('seleccion')"><div class="icon">&#128221;</div><div class="lbl" id="ml-seleccion">Seleccion unica</div><div class="sub2">40 preguntas con retroalimentacion</div></div>
+    <div class="mc" onclick="openTab('asocie')"><div class="icon">&#128279;</div><div class="lbl" id="ml-asocie">Asocie</div><div class="sub2">6 pares - 20 puntos</div></div>
+    <div class="mc" onclick="openTab('seleccion')"><div class="icon">&#128221;</div><div class="lbl" id="ml-seleccion">Seleccion unica</div><div class="sub2">40 preguntas - 60 puntos</div></div>
+    <div class="mc" onclick="openTab('fichas')"><div class="icon">&#127881;</div><div class="lbl" id="ml-fichas">Fichas de repaso</div><div class="sub2">12 conceptos - 20 puntos</div></div>
     <div class="mc" onclick="openTab('resultados')"><div class="icon">&#128203;</div><div class="lbl" id="ml-resultados">Resultados</div><div class="sub2">Desempeno e informe</div></div>
   </div>
 </div>
@@ -288,37 +225,58 @@ footer{background:var(--gris);padding:9px 14px;border-top:2px solid var(--azul);
 <div id="tabsArea">
   <div class="backbar"><button class="back-btn" onclick="goHome()">&#8592; Menu principal</button></div>
   <nav class="tabs">
-    <button class="tb" data-tab="asocie">1. Asocie</button>
-    <button class="tb" data-tab="seleccion">2. Seleccion unica</button>
-    <button class="tb" data-tab="resultados">3. Resultados</button>
+    <button class="tb" data-tab="asocie">1. Asocie (20)</button>
+    <button class="tb" data-tab="seleccion">2. Seleccion (60)</button>
+    <button class="tb" data-tab="fichas">3. Fichas (20)</button>
+    <button class="tb" data-tab="resultados">4. Resultados</button>
   </nav>
   <main>
     <section id="tab-asocie" class="tc">
-      <h2 class="st">Asocie cada concepto con su descripcion</h2>
+      <h2 class="st">1. Asocie &mdash; 6 pares (20 puntos)</h2>
       <p class="inst2">Toque una tarjeta de la columna izquierda y luego la descripcion correspondiente de la derecha.</p>
       <div class="mcont"><div class="mcol" id="mLeft"></div><div class="mcol" id="mRight"></div></div>
       <div style="text-align:center;margin-top:13px;"><button class="pb" id="resetAsocieBtn">Reiniciar</button></div>
-      <div class="tnb"><button disabled>&#8592; Anterior</button><span class="cnt">1 de 3</span><button onclick="switchTab('seleccion')">Siguiente &#8594;</button></div>
+      <div class="tnb"><button disabled>&#8592; Anterior</button><span class="cnt">1 de 4</span><button onclick="switchTab('seleccion')">Siguiente &#8594;</button></div>
     </section>
 
     <section id="tab-seleccion" class="tc">
-      <h2 class="st">Seleccion unica &mdash; 40 preguntas</h2>
+      <h2 class="st">2. Seleccion unica &mdash; 40 preguntas (60 puntos)</h2>
       <p class="inst2">Seleccione la respuesta correcta. <span style="background:#cce5ff;color:#004085;padding:1px 6px;border-radius:8px;font-size:.74rem;">Ejercicio</span> = calculo directo &nbsp;|&nbsp; <span style="background:#d4edda;color:#155724;padding:1px 6px;border-radius:8px;font-size:.74rem;">Aplicacion</span> = problema de contexto</p>
       <div class="qctr" id="qCtr"></div>
       <div id="mcqList"></div>
-      <div style="text-align:center;margin-top:9px;"><button class="pb" id="seeScoreBtn">Ver puntaje</button><div class="sbox" id="mcqScoreBox" style="display:none;"></div></div>
-      <div class="tnb"><button onclick="switchTab('asocie')">&#8592; Anterior</button><span class="cnt">2 de 3</span><button onclick="switchTab('resultados')">Siguiente &#8594;</button></div>
+      <div style="text-align:center;margin-top:9px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;"><button class="pb" id="seeScoreBtn">Ver puntaje</button><button class="ab" id="printSelBtn">&#128424; Imprimir pr&aacute;ctica PDF</button></div><div class="sbox" id="mcqScoreBox" style="display:none;"></div>
+      <div class="tnb"><button onclick="switchTab('asocie')">&#8592; Anterior</button><span class="cnt">2 de 4</span><button onclick="switchTab('fichas')">Siguiente &#8594;</button></div>
+    </section>
+
+    <section id="tab-fichas" class="tc">
+      <h2 class="st">3. Fichas de repaso &mdash; 12 conceptos (20 puntos)</h2>
+      <p class="inst2">Haga clic en cada tarjeta para ver el reverso. Se registran automaticamente.</p>
+      <div class="fwrap" id="fwrap"></div>
+      <div class="fnav">
+        <button onclick="prevFlash()" id="fPrev">&#8592; Anterior</button>
+        <span id="fCtr">0 / 12</span>
+        <button onclick="nextFlash()" id="fNext">Siguiente &#8594;</button>
+      </div>
+      <div style="text-align:center;margin-top:13px;"><button class="pb" id="resetFlashBtn">Reiniciar fichas</button></div>
+      <div class="tnb"><button onclick="switchTab('seleccion')">&#8592; Anterior</button><span class="cnt">3 de 4</span><button onclick="switchTab('resultados')">Siguiente &#8594;</button></div>
     </section>
 
     <section id="tab-resultados" class="tc">
-      <h2 class="st">Resultados de evaluacion</h2>
-      <div class="nfield"><label>Nombre del estudiante:</label><input type="text" id="nameInp" placeholder="Escriba su nombre completo" autocomplete="name"></div>
+      <h2 class="st">4. Resultados de evaluacion</h2>
+      <!-- Datos del estudiante (solo lectura, tomados del registro) -->
+      <div style="background:#f4f6fb;border-radius:10px;padding:13px 15px;margin-bottom:14px;border-left:4px solid var(--azul);font-size:.85rem;line-height:1.8;">
+        <div><strong style="color:var(--azul);">&#128100; Estudiante:</strong> <span id="resNombre">—</span></div>
+        <div><strong style="color:var(--azul);">&#127891; Docente:</strong> <span id="resDocente">—</span></div>
+        <div><strong style="color:var(--azul);">&#128187; Grupo/Plataforma:</strong> <span id="resClase">—</span></div>
+        <div><strong style="color:var(--azul);">&#128231; Correo:</strong> <span style="color:#003087;font-weight:bold;">scubero@uned.ac.cr</span></div>
+      </div>
       <div class="mgrid" id="mgrid"></div>
       <div class="gsbox"><div>Puntaje global</div><div class="big" id="gsNum">--</div><div>/ 100 puntos</div><div id="nBadge"></div></div>
       <div class="rtw"><table class="rt"><thead><tr><th>Actividad</th><th>Resultado</th><th>Detalle</th><th>Pts.</th></tr></thead><tbody id="rtBody"></tbody></table></div>
-      <div class="drow"><button class="ab" id="dlPdf">&#128196; Ver informe PDF</button><button class="ab" id="dlXls">&#128202; Descargar Excel</button></div>
+      <div class="drow"><button class="ab" id="dlPdf">&#128196; Ver informe PDF</button><button class="ab" id="sendEmail">&#128231; Enviar evidencia a la docente</button></div>
       <div class="wmsg" id="dlWarn"></div>
-      <div class="tnb"><button onclick="switchTab('seleccion')">&#8592; Anterior</button><span class="cnt">3 de 3</span><button disabled>Siguiente &#8594;</button></div>
+      <div class="smsg" id="successMsg" style="display:none;"></div>
+      <div class="tnb"><button onclick="switchTab('fichas')">&#8592; Anterior</button><span class="cnt">4 de 4</span><button disabled>Siguiente &#8594;</button></div>
     </section>
   </main>
 </div>
@@ -358,6 +316,15 @@ function M(str){
   return str;
 }
 
+/* ── PUNTAJES CORREGIDOS ── */
+/* 
+✅ ESCALA CORREGIDA:
+- Asocie:       6 pares  × 20/6 = 20 puntos (≤20)
+- Selección:    40 preguntas × 60/40 = 60 puntos (≤60)
+- Fichas:       12 conceptos × 20/12 = 20 puntos (≤20)
+- TOTAL: 100 puntos ✅
+*/
+
 /* ── ASOCIE DATA ── */
 var pairs=[
   {id:1,concept:'Interes simple',def:'Rendimiento calculado como $I = P \\cdot r \\cdot t$, donde $P$ es el capital, $r$ la tasa anual y $t$ el tiempo en anos.'},
@@ -368,9 +335,24 @@ var pairs=[
   {id:6,concept:'Funcion de utilidad',def:'$U(x) = I(x) - C(x) = (p - c_v)x - C_F$. Indica la ganancia al producir $x$ unidades.'}
 ];
 
-/* ── 40 PREGUNTAS ── */
+/* ── FICHAS (12 conceptos) ── */
+var FC=[
+  {f:'Costo fijo',r:'Costo que no cambia con la produccion. Ej: arriendo, salarios base.'},
+  {f:'Costo variable',r:'Costo que cambia con la produccion. Ej: materiales, energia.'},
+  {f:'Ingreso total',r:'$I(x)=p \\cdot x$ donde $p$ es el precio de venta y $x$ es cantidad.'},
+  {f:'Funcion de costo',r:'$C(x) = C_F + c_v \\cdot x$. Suma de costos fijos y variables.'},
+  {f:'Utilidad',r:'$U(x)=I(x)-C(x)$. Ganancia o perdida (negativa).'},
+  {f:'Punto de equilibrio',r:'Cantidad $x^*$ donde $U(x^*)=0$. No hay ganancia ni perdida.'},
+  {f:'Ecuacion lineal',r:'$ax+b=0 \\Rightarrow x=-b/a$. Una sola solucion si $a \\neq 0$.'},
+  {f:'Ecuacion cuadratica',r:'$ax^2+bx+c=0$. Usar formula: $x=\\frac{-b \\pm \\sqrt{\\Delta}}{2a}$ con $\\Delta=b^2-4ac$.'},
+  {f:'Desigualdad lineal',r:'$ax+b>c$ (o $<, \\leq, \\geq$). Soluciones son intervalos o semirrectas.'},
+  {f:'Radicales',r:'$\\sqrt[n]{x}$. Se pueden racionalizar multiplicando por el conjugado.'},
+  {f:'Valor absoluto',r:'$|x|=x$ si $x \\geq 0$; $|x|=-x$ si $x<0$. Siempre $|x| \\geq 0$.'},
+  {f:'Tasa de interes',r:'$r$ = porcentaje anual. En simple: $I=Prt$. En compuesto: $A=P(1+r)^t$.'}
+];
+
+/* ── 40 PREGUNTAS (igual que antes) ── */
 var Q=[
-  /* EJERCICIOS */
   {t:'ej',q:'Resuelva: $3x - 12 = 0$. El conjunto solucion es:',
    o:['$S = \\left\\{4\\right\\}$','$S = \\left\\{-4\\right\\}$','$S = \\left\\{3\\right\\}$','$S = \\left\\{12\\right\\}$'],
    c:0,h:'Sume 12 a ambos miembros y divida entre 3.'},
@@ -431,7 +413,6 @@ var Q=[
   {t:'ej',q:'Sea $P(x)=x-6$. Simplifique $1 - \\dfrac{1/P(x)}{[-P(x)]^{-1}}$:',
    o:['$2$','$0$','$(x-7)/(x-6)$','$1$'],
    c:0,h:'$[-P(x)]^{-1}=-1/P(x)$. Al dividir se obtiene $-1$, luego $1-(-1)=2$.'},
-  /* APLICACIONES */
   {t:'ap',q:'Simplifique: $\\left(a^{-1}+b^{-1}\\right) \\div \\dfrac{a^2-b^2}{(ab)^3}$',
    o:['$a^2b^2/(a-b)$','$a^2b^2/(a+b)$','$(a-b)/a^2b^2$','$(a+b)/ab$'],
    c:0,h:'Escriba $(a+b)/ab$ y multiplique por el reciproco de la division.'},
@@ -489,25 +470,20 @@ var Q=[
   {t:'ap',q:'Se invierten 5000 dolares a interes simple del 6% anual. En cuantos anos se tendra un capital de 6800 dolares?',
    o:['6 anos','4 anos','5 anos','8 anos'],
    c:0,h:'$I=6800-5000=1800$. $1800=5000 \\times 0.06 \\times t$.'},
-  {t:'ap',q:'Para hacer crecer 8000 dolares a 9200 dolares en 3 anos con interes simple, la tasa anual debe ser:',
-   o:['5%','6%','4%','8%'],
-   c:0,h:'$I=1200$. $r=1200/(8000 \\times 3)$.'},
   {t:'ap',q:'Banco ofrece 9% simple anual. Con 12000 dolares invertidos, cuanto se gana en 4 anos?',
    o:['4320 dolares','5000 dolares','4000 dolares','3600 dolares'],
-   c:0,h:'$I=12000 \\times 0.09 \\times 4$.'},
-  {t:'ap',q:'Empresa con $p=50$ y $C(x)=800+30x$. Cuantas unidades para el punto de equilibrio?',
-   o:['40 unidades','20 unidades','50 unidades','80 unidades'],
-   c:0,h:'Resuelva $50x=800+30x$.'}
+   c:0,h:'$I=12000 \\times 0.09 \\times 4$.'}
 ];
-
-
 
 /* ── ESTADO ── */
 var ST={
   asocie:{ok:[],att:0,ts:''},
-  sel:{corr:0,tot:Q.length,det:[],done:false,ts:''}
+  sel:{corr:0,tot:Q.length,det:[],done:false,ts:''},
+  flash:{flips:0,seen:[]}
 };
 var visited={};
+var fCurr=0;
+var seen=0;
 
 /* ── NAVEGACION ── */
 function openTab(t){
@@ -539,7 +515,7 @@ for(var _ti=0;_ti<tbs.length;_ti++){
   (function(btn){btn.addEventListener('click',function(){switchTab(btn.getAttribute('data-tab'));});})(tbs[_ti]);
 }
 function updateMenuCards(){
-  var map={asocie:ST.asocie.ok.length>0,seleccion:ST.sel.corr>0||ST.sel.done,resultados:!!visited.resultados};
+  var map={asocie:ST.asocie.ok.length>0,seleccion:ST.sel.corr>0||ST.sel.done,fichas:ST.flash.flips>0,resultados:!!visited.resultados};
   var keys=Object.keys(map);
   for(var i=0;i<keys.length;i++){
     var el=document.getElementById('ml-'+keys[i]);
@@ -548,8 +524,8 @@ function updateMenuCards(){
 }
 function updateProgress(){
   var n=Object.keys(visited).length;
-  document.getElementById('pfill').style.width=((n/3)*100)+'%';
-  document.getElementById('ptext').textContent='Actividades visitadas: '+n+' de 3';
+  document.getElementById('pfill').style.width=((n/4)*100)+'%';
+  document.getElementById('ptext').textContent='Actividades visitadas: '+n+' de 4';
 }
 
 /* ── ASOCIE ── */
@@ -670,31 +646,85 @@ function answerQ(qi,opt,btn,od,q){
 document.getElementById('seeScoreBtn').addEventListener('click',function(){
   var c=mqr.filter(function(r){return r.wasOk;}).length;
   var sb=document.getElementById('mcqScoreBox');
-  sb.innerHTML=M('\\text{Puntaje: }'+c+'/'+mqr.length+' = '+(c/mqr.length*100).toFixed(1)+'\\%');
+  var pct=(c/mqr.length*100).toFixed(1);
+  sb.innerHTML='<strong>Puntaje: '+c+' / '+mqr.length+'</strong> &nbsp;&mdash;&nbsp; '+pct+'%';
   sb.style.display='block';
 });
 
-
+/* ── FICHAS ── */
+var flashCards=[];
+function initFlash(){
+  flashCards=[];
+  for(var i=0;i<FC.length;i++){
+    flashCards.push({f:FC[i].f,r:FC[i].r,flipped:false});
+  }
+  ST.flash={flips:0,seen:new Array(FC.length).fill(false)};
+  seen=0;
+  fCurr=0;
+  renderFlash();
+}
+function renderFlash(){
+  var fw=document.getElementById('fwrap');fw.innerHTML='';
+  if(fCurr>=0 && fCurr<flashCards.length){
+    var c=flashCards[fCurr];
+    var fc=document.createElement('div');fc.className='fcard'+(c.flipped?' flipped':'');
+    var inner=document.createElement('div');inner.className='finner';
+    var front=document.createElement('div');front.className='ff';front.innerHTML=M(c.f);
+    var back=document.createElement('div');back.className='fb';back.innerHTML=M(c.r);
+    inner.appendChild(front);inner.appendChild(back);
+    fc.appendChild(inner);
+    (function(idx,card){
+      fc.addEventListener('click',function(){
+        card.flipped=!card.flipped;
+        if(!ST.flash.seen[idx]){
+          ST.flash.seen[idx]=true;
+          seen++;
+          ST.flash.flips++;
+        }
+        renderFlash();
+      });
+    })(fCurr,c);
+    fw.appendChild(fc);
+  }
+  document.getElementById('fCtr').textContent=(fCurr+1)+' / '+flashCards.length;
+  document.getElementById('fPrev').disabled=(fCurr===0);
+  document.getElementById('fNext').disabled=(fCurr===flashCards.length-1);
+}
+function nextFlash(){if(fCurr<flashCards.length-1){fCurr++;renderFlash();}}
+function prevFlash(){if(fCurr>0){fCurr--;renderFlash();}}
+document.getElementById('resetFlashBtn').addEventListener('click',function(){
+  for(var i=0;i<flashCards.length;i++)flashCards[i].flipped=false;
+  fCurr=0;seen=0;ST.flash={flips:0,seen:new Array(FC.length).fill(false)};
+  renderFlash();
+});
 
 /* ── RESULTADOS ── */
 function calcScore(){
-  var sc=Math.round(
-    (ST.asocie.ok.length/pairs.length)*30+
-    (ST.sel.corr/ST.sel.tot)*70
-  );return sc>100?100:sc;
+  var asc=ST.asocie.ok.length>0?(Math.round((ST.asocie.ok.length/pairs.length)*20)):0;
+  var sel=ST.sel.corr>0?(Math.round((ST.sel.corr/ST.sel.tot)*60)):0;
+  var fsh=seen>0?(Math.round((seen/FC.length)*20)):0;
+  var sc=asc+sel+fsh;
+  return sc>100?100:sc;
 }
 function getNivel(s){
   if(s>=80)return{l:'Avanzado',c:'nb-a'};
   if(s>=50)return{l:'Intermedio',c:'nb-i'};
   return{l:'Basico',c:'nb-b'};
 }
-function getName(){return document.getElementById('nameInp').value.trim()||'Estudiante';}
+function getName(){return (window.REG&&window.REG.nombre)||'Estudiante';}
+function getEmail(){return 'scubero@uned.ac.cr';}
+function getDocente(){return (window.REG&&window.REG.docente)||'';}
+function getClase(){return (window.REG&&window.REG.clase)||'';}
 function buildResults(){
   var sc=calcScore(),nv=getNivel(sc);
   var mg=document.getElementById('mgrid');mg.innerHTML='';
+  var asc=ST.asocie.ok.length>0?(Math.round((ST.asocie.ok.length/pairs.length)*20)):0;
+  var sel=ST.sel.corr>0?(Math.round((ST.sel.corr/ST.sel.tot)*60)):0;
+  var fsh=seen>0?(Math.round((seen/FC.length)*20)):0;
   var metrics=[
     {v:ST.asocie.ok.length>0?(ST.asocie.ok.length+'/'+pairs.length):'--',l:'Asocie'},
-    {v:(ST.sel.corr>0||ST.sel.done)?(ST.sel.corr+'/'+ST.sel.tot):'--',l:'Seleccion unica'},
+    {v:(ST.sel.corr>0||ST.sel.done)?(ST.sel.corr+'/'+ST.sel.tot):'--',l:'Seleccion'},
+    {v:seen>0?(seen+'/'+FC.length):'--',l:'Fichas'},
     {v:sc,l:'Puntaje /100'}
   ];
   for(var i=0;i<metrics.length;i++){
@@ -704,14 +734,18 @@ function buildResults(){
   document.getElementById('nBadge').innerHTML='<span class="nb '+nv.c+'">Nivel: '+nv.l+'</span>';
   var tb=document.getElementById('rtBody');tb.innerHTML='';
   var rows=[
-    {a:'1. Asocie',
-     r:ST.asocie.ok.length>0?(ST.asocie.ok.length+'/6 pares'):'Pendiente',
-     d:ST.asocie.ok.length>0?('Intentos: '+ST.asocie.att):'--',
-     p:ST.asocie.ok.length>0?(Math.round((ST.asocie.ok.length/pairs.length)*30)+'/30'):'--'},
-    {a:'2. Seleccion unica',
+    {a:'1. Asocie (6 pares)',
+     r:ST.asocie.ok.length>0?(ST.asocie.ok.length+'/6'):'Pendiente',
+     d:ST.asocie.ok.length>0?('Int: '+ST.asocie.att):'--',
+     p:asc+'/20'},
+    {a:'2. Seleccion unica (40)',
      r:(ST.sel.corr>0||ST.sel.done)?(ST.sel.corr+'/'+ST.sel.tot):'Pendiente',
      d:ST.sel.ts||'--',
-     p:ST.sel.corr>0?(Math.round((ST.sel.corr/ST.sel.tot)*70)+'/70'):'--'}
+     p:sel+'/60'},
+    {a:'3. Fichas de repaso (12)',
+     r:seen>0?(seen+'/'+FC.length):'Pendiente',
+     d:ST.flash.flips>0?('Vistas: '+ST.flash.flips):'--',
+     p:fsh+'/20'}
   ];
   for(var i=0;i<rows.length;i++){
     var tr=document.createElement('tr');
@@ -722,26 +756,72 @@ function buildResults(){
   updateMenuCards();
 }
 
+/* ── ENVIAR EVIDENCIA A LA DOCENTE (mailto:) ── */
+document.getElementById('sendEmail').addEventListener('click',function(){
+  var nm=getName(),sc=calcScore(),nv=getNivel(sc);
+  var asc=ST.asocie.ok.length>0?(Math.round((ST.asocie.ok.length/pairs.length)*20)):0;
+  var sel=ST.sel.corr>0?(Math.round((ST.sel.corr/ST.sel.tot)*60)):0;
+  var fsh=seen>0?(Math.round((seen/FC.length)*20)):0;
+  var msg=document.getElementById('successMsg');
+  var warn=document.getElementById('dlWarn');
+  msg.style.display='none';
+  warn.textContent='';
+
+  var asunto='Evidencia Práctica MAT0491 — '+nm;
+
+  var cuerpo=
+    'Estimada docente,\n\n'+
+    'Le comparto los resultados de mi práctica del Cuaderno Interactivo:\n\n'+
+    '══════════════════════════════════\n'+
+    'DATOS DEL ESTUDIANTE\n'+
+    '══════════════════════════════════\n'+
+    'Nombre:          '+nm+'\n'+
+    'Docente:         '+getDocente()+'\n'+
+    'Grupo/Plataforma:'+getClase()+'\n'+
+    'Fecha:           '+nowStr()+'\n\n'+
+    '══════════════════════════════════\n'+
+    'RESULTADOS\n'+
+    '══════════════════════════════════\n'+
+    'Asocie (6 pares):        '+ST.asocie.ok.length+'/6   → '+asc+'/20 pts\n'+
+    'Selección única (40 preg): '+ST.sel.corr+'/40  → '+sel+'/60 pts\n'+
+    'Fichas de repaso (12):   '+seen+'/12  → '+fsh+'/20 pts\n'+
+    '──────────────────────────────────\n'+
+    'PUNTAJE GLOBAL:          '+sc+'/100\n'+
+    'NIVEL:                   '+nv.l+'\n'+
+    '══════════════════════════════════\n\n'+
+    'Curso: Matemática para Administradores I — Código 0491\n'+
+    'UNED — Cátedra de Matemáticas Aplicadas\n\n'+
+    'Saludos cordiales,\n'+nm;
+
+  var mailto='mailto:scubero@uned.ac.cr'+
+    '?subject='+encodeURIComponent(asunto)+
+    '&body='+encodeURIComponent(cuerpo);
+
+  window.location.href=mailto;
+
+  msg.innerHTML='&#10003; Se abrió su cliente de correo con los resultados listos.<br>'+
+    '<small style="color:#555;">Revise que el correo se envió desde su aplicación de correo.</small>';
+  msg.style.display='block';
+});
+
 /* ── PDF ── */
 document.getElementById('dlPdf').addEventListener('click',function(){
-  document.getElementById('dlWarn').textContent='';
   var sc=calcScore(),nv=getNivel(sc),nm=getName();
-  var detHtml='';
-  if(ST.sel.det.length){
-    detHtml='<h3 style="color:#003087;margin:14px 0 5px;font-size:.88rem;">Detalle Seleccion unica</h3>'+
+  var asc=ST.asocie.ok.length>0?(Math.round((ST.asocie.ok.length/pairs.length)*20)):0;
+  var sel=ST.sel.corr>0?(Math.round((ST.sel.corr/ST.sel.tot)*60)):0;
+  var fsh=seen>0?(Math.round((seen/FC.length)*20)):0;
+  var detHtml='<h3 style="color:#003087;margin:14px 0 5px;font-size:.88rem;">Detalle Seleccion unica</h3>'+
       '<table style="width:100%;border-collapse:collapse;font-size:.74rem;"><thead><tr style="background:#003087;color:#fff;">'+
       '<th style="padding:5px;border:1px solid #dde;">N.</th><th style="padding:5px;border:1px solid #dde;">Tipo</th>'+
-      '<th style="padding:5px;border:1px solid #dde;">Pregunta</th><th style="padding:5px;border:1px solid #dde;">OK</th></tr></thead><tbody>';
-    for(var i=0;i<ST.sel.det.length;i++){
-      var d=ST.sel.det[i];
-      detHtml+='<tr style="background:'+(i%2?'#f4f6fb':'#fff')+'">'+
-        '<td style="padding:5px;border:1px solid #dde;">'+d.n+'</td>'+
-        '<td style="padding:5px;border:1px solid #dde;">'+d.tipo+'</td>'+
-        '<td style="padding:5px;border:1px solid #dde;">'+escXml(d.q.replace(/\$[^$]+\$/g,'[formula]').substring(0,60))+'...</td>'+
-        '<td style="padding:5px;border:1px solid #dde;">'+(d.ok?'Si':'No')+'</td></tr>';
-    }
-    detHtml+='</tbody></table>';
+      '<th style="padding:5px;border:1px solid #dde;">Estado</th></tr></thead><tbody>';
+  for(var i=0;i<ST.sel.det.length;i++){
+    var d=ST.sel.det[i];
+    detHtml+='<tr style="background:'+(i%2?'#f4f6fb':'#fff')+'">'+
+      '<td style="padding:5px;border:1px solid #dde;">'+d.n+'</td>'+
+      '<td style="padding:5px;border:1px solid #dde;">'+d.tipo+'</td>'+
+      '<td style="padding:5px;border:1px solid #dde;">'+(d.ok?'✓ Correcta':'✗ Incorrecta')+'</td></tr>';
   }
+  detHtml+='</tbody></table>';
   document.getElementById('printContent').innerHTML=
     '<div style="font-family:Arial,sans-serif;color:#1a1a2e;">'+
     '<div style="background:#003087;color:#fff;padding:14px;border-radius:8px;margin-bottom:12px;text-align:center;">'+
@@ -750,6 +830,8 @@ document.getElementById('dlPdf').addEventListener('click',function(){
     '</div>'+
     '<div style="background:#f4f6fb;padding:10px 13px;border-radius:7px;font-size:.82rem;line-height:1.7;margin-bottom:12px;">'+
     '<strong>Estudiante:</strong> '+escXml(nm)+'<br>'+
+    '<strong>Docente:</strong> '+escXml(getDocente())+'<br>'+
+    '<strong>Grupo / Plataforma:</strong> '+escXml(getClase())+'<br>'+
     '<strong>Fecha:</strong> '+nowStr()+'<br>'+
     '<strong>Elaborado por:</strong> MSc. Sarita Melissa Cubero Solano - 2026'+
     '</div>'+
@@ -760,83 +842,114 @@ document.getElementById('dlPdf').addEventListener('click',function(){
     '</div>'+
     '<table style="width:100%;border-collapse:collapse;font-size:.79rem;margin-bottom:12px;">'+
     '<thead><tr style="background:#003087;color:#fff;"><th style="padding:6px;border:1px solid #dde;">Actividad</th><th style="padding:6px;border:1px solid #dde;">Resultado</th><th style="padding:6px;border:1px solid #dde;">Puntaje</th></tr></thead><tbody>'+
-    '<tr><td style="padding:6px;border:1px solid #dde;">Asocie</td><td style="padding:6px;border:1px solid #dde;">'+(ST.asocie.ok.length>0?ST.asocie.ok.length+'/6 pares':'Pendiente')+'</td><td style="padding:6px;border:1px solid #dde;">'+(ST.asocie.ok.length>0?Math.round((ST.asocie.ok.length/pairs.length)*20)+'/20':'--')+'</td></tr>'+
-    '<tr style="background:#f4f6fb"><td style="padding:6px;border:1px solid #dde;">Seleccion unica</td><td style="padding:6px;border:1px solid #dde;">'+(ST.sel.corr>0||ST.sel.done?ST.sel.corr+'/40':'Pendiente')+'</td><td style="padding:6px;border:1px solid #dde;">'+(ST.sel.corr>0?Math.round((ST.sel.corr/ST.sel.tot)*60)+'/60':'--')+'</td></tr>'+
-    '<tr><td style="padding:6px;border:1px solid #dde;">Fichas de repaso</td><td style="padding:6px;border:1px solid #dde;">'+(ST.flash.flips>0?seen+'/12 vistas':'Pendiente')+'</td><td style="padding:6px;border:1px solid #dde;">'+(ST.flash.flips>0?Math.round((seen/FC.length)*20)+'/20':'--')+'</td></tr>'+
+    '<tr><td style="padding:6px;border:1px solid #dde;">Asocie (6 pares)</td><td style="padding:6px;border:1px solid #dde;">'+(ST.asocie.ok.length>0?ST.asocie.ok.length+'/6':'Pendiente')+'</td><td style="padding:6px;border:1px solid #dde;">'+asc+'/20</td></tr>'+
+    '<tr style="background:#f4f6fb"><td style="padding:6px;border:1px solid #dde;">Seleccion (40 preg)</td><td style="padding:6px;border:1px solid #dde;">'+(ST.sel.corr>0||ST.sel.done?ST.sel.corr+'/40':'Pendiente')+'</td><td style="padding:6px;border:1px solid #dde;">'+sel+'/60</td></tr>'+
+    '<tr><td style="padding:6px;border:1px solid #dde;">Fichas (12 conceptos)</td><td style="padding:6px;border:1px solid #dde;">'+(seen>0?seen+'/12':'Pendiente')+'</td><td style="padding:6px;border:1px solid #dde;">'+fsh+'/20</td></tr>'+
     '</tbody></table>'+
     detHtml+
     '<p style="margin-top:14px;font-size:.68rem;color:#999;border-top:1px solid #dde;padding-top:7px;">'+
-    'Generado automaticamente - Cuaderno Interactivo UNED - Matematica para Administradores Codigo 0491. MSc. Sarita Melissa Cubero Solano, 2026.</p>'+
+    'Generado automaticamente - Cuaderno Interactivo UNED - Codigo 0491. MSc. Sarita Melissa Cubero Solano, 2026.</p>'+
     '</div>';
   document.getElementById('printOverlay').style.display='block';
   window.scrollTo({top:0,behavior:'smooth'});
 });
 
-/* ── EXCEL ── */
-document.getElementById('dlXls').addEventListener('click',function(){
-  document.getElementById('dlWarn').textContent='';
-  var sc=calcScore(),nv=getNivel(sc),nm=getName();
-  function row(){
-    var vals=Array.prototype.slice.call(arguments);
-    return '<Row>'+vals.map(function(x){return '<Cell><Data ss:Type="String">'+escXml(String(x).replace(/\$[^$]+\$/g,'').substring(0,120))+'</Data></Cell>';}).join('')+'</Row>';
+/* ── IMPRIMIR PRÁCTICA SELECCIÓN ÚNICA ── */
+document.getElementById('printSelBtn').addEventListener('click',function(){
+  var html='<div style="font-family:Arial,sans-serif;color:#1a1a2e;font-size:11pt;">';
+  // Encabezado
+  html+='<div style="background:#003087;color:#fff;padding:16px;border-radius:8px;margin-bottom:18px;text-align:center;">'+
+    '<div style="font-size:10pt;opacity:.9;">Universidad Estatal a Distancia &bull; Cátedra de Matemáticas Aplicadas</div>'+
+    '<div style="font-size:14pt;font-weight:bold;margin:6px 0;">Práctica de Selección Única &mdash; Código 0491</div>'+
+    '<div style="font-size:9pt;opacity:.85;">Matemática para Administradores &nbsp;&middot;&nbsp; MSc. Sarita Melissa Cubero Solano, 2026</div>'+
+    '</div>';
+  html+='<p style="font-size:9pt;background:#f4f6fb;padding:8px 12px;border-radius:6px;margin-bottom:14px;">'+
+    '<strong>Instrucciones:</strong> Seleccione la única respuesta correcta para cada ítem. '+
+    'Cada pregunta vale '+Number((60/Q.length).toFixed(2))+' puntos. Total: 60 puntos.</p>';
+  // Preguntas
+  for(var i=0;i<Q.length;i++){
+    var q=Q[i];
+    var tag=q.t==='ej'?'<span style="background:#cce5ff;color:#004085;padding:1px 6px;border-radius:8px;font-size:8pt;font-weight:bold;">Ejercicio</span>':
+                       '<span style="background:#d4edda;color:#155724;padding:1px 6px;border-radius:8px;font-size:8pt;font-weight:bold;">Aplicación</span>';
+    html+='<div style="border:1px solid #c8d0e0;border-radius:8px;padding:10px 12px;margin-bottom:10px;break-inside:avoid;">';
+    html+=tag+' <strong>'+(i+1)+'.</strong> '+q.q.replace(/\$/g,'').replace(/\\[a-zA-Z]+/g,'')+'<br>';
+    html+='<div style="margin-top:7px;display:grid;grid-template-columns:1fr 1fr;gap:5px;">';
+    for(var j=0;j<q.o.length;j++){
+      var letra=['A','B','C','D'][j];
+      var opText=q.o[j].replace(/\$/g,'').replace(/\\[a-zA-Z{},\^_\s]+/g,'').replace(/[\{\}]/g,'').trim();
+      html+='<div style="border:1px solid #dde;border-radius:4px;padding:5px 8px;font-size:10pt;">'+
+        '<strong>'+letra+'.</strong> '+opText+'</div>';
+    }
+    html+='</div></div>';
   }
-  function hrow(){
-    var vals=Array.prototype.slice.call(arguments);
-    return '<Row>'+vals.map(function(x){return '<Cell ss:StyleID="h"><Data ss:Type="String">'+escXml(String(x))+'</Data></Cell>';}).join('')+'</Row>';
-  }
-  var selRows='';
-  for(var i=0;i<ST.sel.det.length;i++){
-    var d=ST.sel.det[i];
-    selRows+=row(d.n,d.tipo,d.q.replace(/\$[^$]+\$/g,''),d.sel.replace(/\$[^$]+\$/g,''),d.ok?'Si':'No');
-  }
-  if(!selRows)selRows=row('Sin datos','--','--','--','--');
-  var flashRows='';
-  for(var i=0;i<FC.length;i++){
-    flashRows+=row(i+1,FC[i].f.replace(/\$[^$]+\$/g,''),ST.flash.seen[i]?'Si':'No',ST.flash.seen[i]?1:0);
-  }
-  var xls='<?xml version="1.0" encoding="UTF-8"?><?mso-application progid="Excel.Sheet"?>'+
-    '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">'+
-    '<Styles><Style ss:ID="h"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#003087" ss:Pattern="Solid"/></Style></Styles>'+
-    '<Worksheet ss:Name="Resumen"><Table>'+
-    hrow('Campo','Valor')+
-    row('Estudiante',nm)+row('Curso','Matematica para Administradores I - Codigo 0491')+
-    row('Institucion','UNED de Costa Rica')+row('Fecha',nowStr())+
-    row('Puntaje global',sc+'/100')+row('Nivel',nv.l)+
-    row('Elaborado por','MSc. Sarita Melissa Cubero Solano - 2026')+
-    hrow('Actividad','Resultado','Puntaje parcial')+
-    row('Asocie',ST.asocie.ok.length>0?ST.asocie.ok.length+'/6':'Pendiente',ST.asocie.ok.length>0?Math.round((ST.asocie.ok.length/pairs.length)*20)+'/20':'--')+
-    row('Seleccion unica',ST.sel.corr>0||ST.sel.done?ST.sel.corr+'/40':'Pendiente',ST.sel.corr>0?Math.round((ST.sel.corr/ST.sel.tot)*60)+'/60':'--')+
-    row('Fichas',ST.flash.flips>0?seen+'/12':'Pendiente',ST.flash.flips>0?Math.round((seen/FC.length)*20)+'/20':'--')+
-    row('Nota','Generado automaticamente - Cuaderno Interactivo UNED. MSc. Sarita Melissa Cubero Solano 2026','--')+
-    '</Table></Worksheet>'+
-    '<Worksheet ss:Name="Seleccion Unica"><Table>'+
-    hrow('N.','Tipo','Pregunta','Respuesta seleccionada','Correcta')+selRows+
-    '</Table></Worksheet>'+
-    '<Worksheet ss:Name="Fichas"><Table>'+
-    hrow('N.','Concepto','Vio el reverso','Registrado')+flashRows+
-    '</Table></Worksheet>'+
-    '<Worksheet ss:Name="Nivel"><Table>'+
-    hrow('Puntaje','Nivel','Descripcion')+
-    row(sc+'/100',nv.l,sc>=80?'Domina los contenidos.':sc>=50?'Comprende los fundamentos.':'Requiere refuerzo.')+
-    hrow('Escala','','')+row('80-100','Avanzado','Domina todos los contenidos.')+
-    row('50-79','Intermedio','Comprende los fundamentos.')+row('0-49','Basico','Requiere refuerzo.')+
-    '</Table></Worksheet>'+
-    '</Workbook>';
-  var uri='data:application/vnd.ms-excel;charset=utf-8,'+encodeURIComponent(xls);
-  var a=document.createElement('a');
-  a.href=uri;a.download='Informe_'+nm.replace(/\s+/g,'_')+'_MAT0491.xls';a.target='_blank';
-  document.body.appendChild(a);a.click();
-  setTimeout(function(){a.remove();},1000);
+  // Pie de página
+  html+='<div style="margin-top:18px;border-top:1px solid #dde;padding-top:10px;font-size:8pt;color:#888;text-align:center;">'+
+    'Cuaderno Interactivo UNED &mdash; Código 0491 &bull; '+
+    'Elaborado por: MSc. Sarita Melissa Cubero Solano, 2026</div>';
+  html+='</div>';
+  document.getElementById('printContent').innerHTML=html;
+  document.getElementById('printOverlay').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
 });
 
-/* ── EXPONER FUNCIONES GLOBALES (requerido por onclick en HTML) ── */
+/* ── EXPONER FUNCIONES GLOBALES ── */
 window.openTab  = openTab;
 window.switchTab = switchTab;
 window.goHome   = goHome;
+window.nextFlash = nextFlash;
+window.prevFlash = prevFlash;
 
 /* ── INIT ── */
-initAsocie();initMCQ();updateProgress();
-document.getElementById('mainMenu').style.display='block';
+initAsocie();initMCQ();initFlash();updateProgress();
+
+/* ── REGISTRO OBLIGATORIO ── */
+window.REG = null;
+
+// Mostrar pantalla de registro al inicio
+document.getElementById('registroScreen').style.display = 'block';
+document.getElementById('mainMenu').style.display = 'none';
+
+function validarRegistro(){
+  var nombre  = document.getElementById('regNombre').value.trim();
+  var docente = document.getElementById('regDocente').value.trim();
+  var clase   = document.getElementById('regClase').value.trim();
+  var ok = true;
+
+  // Mostrar/ocultar errores
+  document.getElementById('errNombre').style.display  = nombre  ? 'none' : 'block';
+  document.getElementById('errDocente').style.display = docente ? 'none' : 'block';
+  document.getElementById('errClase').style.display   = clase   ? 'none' : 'block';
+
+  if(!nombre || !docente || !clase) ok = false;
+
+  if(ok){
+    window.REG = {nombre: nombre, docente: docente, clase: clase};
+    // Actualizar barra de resultados
+    document.getElementById('resNombre').textContent = nombre;
+    document.getElementById('resDocente').textContent = docente;
+    document.getElementById('resClase').textContent = clase;
+    // Ocultar registro, mostrar menú
+    document.getElementById('registroScreen').style.display = 'none';
+    document.getElementById('mainMenu').style.display = 'block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+
+document.getElementById('regContinuarBtn').addEventListener('click', validarRegistro);
+
+// Permitir Enter en cualquier campo del registro
+['regNombre','regDocente','regClase'].forEach(function(id){
+  document.getElementById(id).addEventListener('keydown', function(e){
+    if(e.key === 'Enter') validarRegistro();
+  });
+});
+
+// Modificar goHome para no volver al registro si ya fue completado
+var _origGoHome = goHome;
+goHome = function(){
+  _origGoHome();
+};
+window.goHome = goHome;
 
 })();
 </script>
